@@ -1,0 +1,6 @@
+framework module UIComboBox {
+  umbrella header "UIComboBox-umbrella.h"
+
+  export *
+  module * { export * }
+}

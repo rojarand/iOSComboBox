@@ -1,0 +1,16 @@
+PODS:
+  - UIComboBox (0.1.0)
+
+DEPENDENCIES:
+  - UIComboBox (from `.`)
+
+EXTERNAL SOURCES:
+  UIComboBox:
+    :path: "."
+
+SPEC CHECKSUMS:
+  UIComboBox: 2d1c927ff81c473a55ebce48a536f37976843c59
+
+PODFILE CHECKSUM: 2bfd77c41ba74a4574a38fb0f4e881257b703d80
+
+COCOAPODS: 1.15.2

@@ -1,0 +1,10 @@
+# Xcode Project
+**/*.xcodeproj/xcuserdata/
+**/*.xcworkspace/xcuserdata/
+
+# vim
+*.swp
+
+# Other
+*~
+.DS_Store
