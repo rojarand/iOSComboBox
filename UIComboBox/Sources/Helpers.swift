@@ -31,7 +31,7 @@ extension CGRect {
 extension UITableView {
     func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: String(describing: T.self), for: indexPath) as? T else {
-            fatalError("Could not dequeue tableview cell with identifier: \(T.self)")
+            fatalError("Could not dequeue a tableview cell with the identifier: \(T.self)")
         }
         return cell
     }

@@ -7,3 +7,11 @@ install! 'cocoapods', :disable_input_output_paths => true, :share_schemes_for_de
 target 'UIComboBoxApp' do
     pod 'UIComboBox', :path => '.'
 end 
+
+target 'UIComboBoxTests' do
+    pod 'UIComboBox', :path => '.'
+end
+
+target 'UIComboBoxUITests' do
+    pod 'UIComboBox', :path => '.'
+end

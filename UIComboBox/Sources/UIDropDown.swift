@@ -9,10 +9,14 @@ import Foundation
 
 import UIKit
 
-class UIComboBox: UIView {
+open class UIDropDown: UIView {
     
-    weak var delegate: UIComboBoxDelegate?
-    weak var anchorView: UIView?
+    var propertyObservations = [NSKeyValueObservation]()
+    
+    public weak var delegate: UIDropDownDelegate?
+    //Should it be public?
+    public weak var anchorView: UIView?
+    
     private var showDropDownAnimator: UIViewPropertyAnimator?
     private var showDropDownDelayTimer: Timer?
     private var isKeyboardVisible = false
@@ -20,22 +24,6 @@ class UIComboBox: UIView {
     private var cellClasses = [AnyClass]()
     private var _separatorStyle: UITableViewCell.SeparatorStyle = .singleLine
     
-    init() {
-        super.init(frame: .zero)
-        backgroundColor = .clear
-        addSubview(dismissableView)
-        addSubview(tableViewContainer)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     private lazy var dismissableView: UIView = {
         let view = DropDownDismissingView { [weak self] _, _ in
@@ -62,6 +50,23 @@ class UIComboBox: UIView {
         let tableView = _tableView ?? createTableView()
         _tableView = tableView
         return tableView
+    }
+    
+    public init() {
+        super.init(frame: .zero)
+        backgroundColor = .clear
+        addSubview(dismissableView)
+        addSubview(tableViewContainer)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func createTableView() -> UITableView {
@@ -153,7 +158,9 @@ class UIComboBox: UIView {
     }
     
     private func calculateDesirableContainerHeight() -> CGFloat {
-        tableView.sizeThatFits(bounds.size).height
+        let height = tableView.sizeThatFits(bounds.size).height
+        NSLog("--- Height: \(height)")
+        return height
     }
     
     private var verticalMargin: CGFloat {
@@ -193,9 +200,25 @@ class UIComboBox: UIView {
 
 // MARK: - API
 
-extension UIComboBox {
+extension UIDropDown {
     
-    func show(nextTo anchorView: UIView) {
+    private func hideOnScroll(of view: UIView?) {
+        guard let currentView = view else { return }
+        if let table = currentView as? UITableView {
+            let observation = table.observe(\.contentOffset, options: [.old, .new]) { [weak self] object, change in
+                if change.newValue != change.oldValue {
+                    print("Property changed from \(change.oldValue) to \(change.newValue)")
+                    self?.hide()
+                }
+            }
+            self.propertyObservations.append(observation)
+        }
+        hideOnScroll(of: currentView.superview)
+    }
+    
+    public func show(nextTo anchorView: UIView) {
+        
+        hideOnScroll(of: anchorView)
         let animate = !isAddedToViewHierarchy
         let delayOfShowAnimation = isCurrentAnchorView(anchorView) ? 0.0 : 0.5
         
@@ -209,7 +232,7 @@ extension UIComboBox {
         showDropDown(animate: animate, delay: delayOfShowAnimation)
     }
     
-    func hide() {
+    public func hide() {
         showDropDownDelayTimer?.invalidate()
         showDropDownDelayTimer = nil
         showDropDownAnimator?.stopAnimation(true)
@@ -219,13 +242,13 @@ extension UIComboBox {
         removeFromViewHierarchy()
     }
     
-    func register<T: UITableViewCell>(cell: T.Type) {
+    public func register<T: UITableViewCell>(cell: T.Type) {
         cellClasses.append(cell)
-        _tableView?.register(T.self, forCellReuseIdentifier: String(describing: T.self))
+        tableView.register(T.self, forCellReuseIdentifier: String(describing: T.self))
     }
     
-    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T? {
-        return _tableView?.dequeueReusableCell(for: indexPath)
+    public func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
+        tableView.dequeueReusableCell(for: indexPath)
     }
     
     var cornerRadius: CGFloat {
@@ -287,13 +310,13 @@ extension UIComboBox {
 
 // MARK: - UITableViewDelegate
 
-extension UIComboBox: UITableViewDelegate {
+extension UIDropDown: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         delegate?.dropDown(self, heightForRowAt: indexPath) ?? 0.0
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.dropDown(self, didSelectRowAt: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         hide()
@@ -302,31 +325,31 @@ extension UIComboBox: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 
-extension UIComboBox: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+extension UIDropDown: UITableViewDataSource {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         delegate?.dropDown(self, cellForRowAt: indexPath) ?? UITableViewCell(style: .default, reuseIdentifier: nil)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         delegate?.numberOfRows(in: self) ?? 0
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         delegate?.dropDown(self, canEditRowAt: indexPath) ?? false
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         delegate?.dropDown(self, commit: editingStyle, forRowAt: indexPath)
     }
 }
 
 // MARK: - Keyboard Notifications
 
-extension UIComboBox {
+extension UIDropDown {
     
     @objc private func keyboardWillShow(_ notification: Notification) {
         isKeyboardVisible = true
@@ -386,11 +409,11 @@ struct DropDownLayoutCalculator {
                                         minYOfDropDown: CGFloat,
                                         maxYOfDropDown: CGFloat) -> DropDownLayout {
         
-        let layoutAboveAnchorView = calculateTopDrowDownLayout(desirableContainerHeight,
+        let layoutAboveAnchorView = calculateTopDropDownLayout(desirableContainerHeight,
                                                                anchorViewFrame,
                                                                minYOfDropDown)
         
-        let layoutBelowAnchorView = calculateBottomDrowDownLayout(desirableContainerHeight,
+        let layoutBelowAnchorView = calculateBottomDropDownLayout(desirableContainerHeight,
                                                                   anchorViewFrame,
                                                                   maxYOfDropDown)
         let shouldPlaceBelowAnchorView = layoutBelowAnchorView.offscreenHeight <= layoutAboveAnchorView.offscreenHeight
@@ -401,7 +424,7 @@ struct DropDownLayoutCalculator {
         }
     }
     
-    private static func calculateTopDrowDownLayout(_ desirableContainerHeight: CGFloat,
+    private static func calculateTopDropDownLayout(_ desirableContainerHeight: CGFloat,
                                                    _ anchorViewFrame: CGRect,
                                                    _ minYOfDropDown: CGFloat) -> DropDownLayout {
         let dropDownDesirableMinY = anchorViewFrame.minY - desirableContainerHeight
@@ -414,7 +437,7 @@ struct DropDownLayoutCalculator {
         return DropDownLayout(initialFrame: .zero, finalFrame: dropDownFrame, offscreenHeight: dropDownOffscreenHeight)
     }
     
-    private static func calculateBottomDrowDownLayout(_ desirableContainerHeight: CGFloat,
+    private static func calculateBottomDropDownLayout(_ desirableContainerHeight: CGFloat,
                                                       _ anchorViewFrame: CGRect,
                                                       _ maxYOfDropDown: CGFloat) -> DropDownLayout {
         let dropDownDesirableMinY = anchorViewFrame.maxY
@@ -429,17 +452,17 @@ struct DropDownLayoutCalculator {
     }
 }
 
-protocol UIComboBoxDelegate: AnyObject {
-    func dropDown(_ dropDown: UIComboBox, heightForRowAt indexPath: IndexPath) -> CGFloat
-    func dropDown(_ dropDown: UIComboBox, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    func dropDown(_ dropDown: UIComboBox, didSelectRowAt indexPath: IndexPath)
-    func numberOfRows(in dropDown: UIComboBox) -> Int
+public protocol UIDropDownDelegate: AnyObject {
+    func dropDown(_ dropDown: UIDropDown, heightForRowAt indexPath: IndexPath) -> CGFloat
+    func dropDown(_ dropDown: UIDropDown, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    func dropDown(_ dropDown: UIDropDown, didSelectRowAt indexPath: IndexPath)
+    func numberOfRows(in dropDown: UIDropDown) -> Int
     
-    func dropDown(_ dropDown: UIComboBox, canEditRowAt indexPath: IndexPath) -> Bool
-    func dropDown(_ dropDown: UIComboBox, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    func dropDown(_ dropDown: UIDropDown, canEditRowAt indexPath: IndexPath) -> Bool
+    func dropDown(_ dropDown: UIDropDown, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
 }
 
-extension UIComboBoxDelegate {
-    func dropDown(_ dropDown: UIComboBox, canEditRowAt indexPath: IndexPath) -> Bool { false }
-    func dropDown(_ dropDown: UIComboBox, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {}
+extension UIDropDownDelegate {
+    func dropDown(_ dropDown: UIDropDown, canEditRowAt indexPath: IndexPath) -> Bool { false }
+    func dropDown(_ dropDown: UIDropDown, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {}
 }
