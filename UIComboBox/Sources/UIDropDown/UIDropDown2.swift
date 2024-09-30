@@ -93,27 +93,17 @@ open class UIDropDown2: NSObject {
     
     private weak var previousFrontView: UIView?
     private func setUp(_ anchorView: UITextField, _ window: UIWindow) {
-        
-        /*
-        if let previousFrontView = anchorView.superview?.subviews.last, previousFrontView != anchorView {
-            self.previousFrontView = previousFrontView
-            anchorView.superview?.exchangeSubview(at: <#T##Int#>, withSubviewAt: <#T##Int#>)
-        }
-        */
         hideOnScroll(of: anchorView)
         anchorView.superview?.bringSubviewToFront(anchorView)
         if dismissingView.superview == nil {
-//            anchorView.addSubview(dismissingView)
-//            dismissingView.translatesAutoresizingMaskIntoConstraints = true
-//            dismissingView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//            dismissingView.frame = CGRect(x: -100.0, y: -200.0, width: 400, height: 400)
             window.addSubview(dismissingView)
+            window.bringSubviewToFront(dismissingView)
         }
         if tableViewContainer.superview == nil {
-            anchorView.addSubview(tableViewContainer)
             tableViewContainer.translatesAutoresizingMaskIntoConstraints = true
             tableViewContainer.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            //window.addSubview(tableViewContainer)
+            window.addSubview(tableViewContainer)
+            window.bringSubviewToFront(tableViewContainer)
         }
         if (tableView.superview == nil) {
             tableViewContainer.addSubview(tableView)
@@ -132,21 +122,15 @@ open class UIDropDown2: NSObject {
     }
     
     private func layout(_ anchorView: UITextField, _ window: UIWindow, _ animate: Bool, _ delay: TimeInterval) {
-        
         let dropDownLayout = calculateDropDownLayout()
-        NSLog("--- dropDownLayout.finalFrame: \(dropDownLayout.finalFrame)")
         prepareTableView(offscreenHeight: dropDownLayout.offscreenHeight)
         layoutDropDown(using: dropDownLayout)
         
         
         func calculateDropDownLayout() -> DropDownLayout {
             tableView.reloadData()
-            
-            let height = tableView.calculateTableViewHeight() //.sizeThatFits(window.bounds.size).height
-            NSLog("--- height: \(height)")
-            
-            return DropDownLayoutCalculator2.calculateDropDownLayout(
-                desirableContainerHeight: /*tableView.sizeThatFits(window.bounds.size).*/height,
+            return DropDownLayoutCalculator.calculateDropDownLayout(
+                desirableContainerHeight: tableView.calculateTableViewHeight(),
                 anchorViewFrame: anchorView.convert(anchorView.bounds, to: window),
                 minYOfDropDown: calculateMinYOfDropDown(),
                 maxYOfDropDown: calculateMaxYOfDropDown(window))
