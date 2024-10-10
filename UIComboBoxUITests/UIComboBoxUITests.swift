@@ -17,12 +17,6 @@ extension XCUIElement {
     }
 }
 
-private extension XCUIApplication {
-    func expandDropDownWithItems() {
-        staticTexts["Enter text here"].tap()
-    }
-}
-
 final class UIComboBoxUITests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -39,10 +33,10 @@ final class UIComboBoxUITests: XCTestCase {
     }
 
     //po print(app.debugDescription)!!!!!!!!
-    func testComboBoxHasTextEqualToSelectedInDropDown() throws {
+    func test_the_comboBox_has_text_equal_to_selected_in_the_dropDown() throws {
         let app = XCUIApplication()
         app.launch()
-        app.expandDropDownWithItems()
+        app.staticTexts["Enter text here"].tap()
         
         let comboItem4 = app.staticTexts.matching(identifier: "Item 4").firstMatch
         XCTAssertTrue(comboItem4.waitForExistence(timeout: 5.0))
@@ -52,27 +46,47 @@ final class UIComboBoxUITests: XCTestCase {
         XCTAssertEqual(textField.value as? String, "Item 4")
     }
     
-    func testDropDownItemsShowWhenComboBoxIsTapped() throws {
-        let app = XCUIApplication()
-        app.launch()
-        app.expandDropDownWithItems()
-        
-        let comboItem = app.staticTexts.matching(identifier: "Item 1").firstMatch
-        XCTAssert(comboItem.waitFor(format: "exists == true"), "The combo did not appear.")
-    }
-    
-    func testComboBoxHidesWhenParentTableScrolls() throws {
+    //po print(app.debugDescription)!!!!!!!!
+    func test_dropdown_items_are_visible_after_scrolling_comboBox() throws {
         let app = XCUIApplication()
         app.launch()
         
-        let scrollUpButton = app.buttons["Wait & scroll up"]
+        let scrollUpButton = app.buttons["Scroll up"]
         XCTAssert(scrollUpButton.exists)
         scrollUpButton.tap()
         
-        app.expandDropDownWithItems()
+        app.staticTexts["Enter text here"].tap()
         
-        let comboItem = app.staticTexts.matching(identifier: "Item 1").firstMatch
-        XCTAssert(comboItem.waitFor(format: "exists == false"), "The combo did not hide.")
+        let comboItem4 = app.staticTexts.matching(identifier: "Item 4").firstMatch
+        XCTAssert(comboItem4.waitFor(format: "exists == true"))
+    }
+    
+    func test_dropDown_items_are_visible_when_comboBox_at_the_top_of_the_screen_is_tapped() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.textFields["TopComboBox"].tap()
+
+        let topComboItem = app.staticTexts.matching(identifier: "Poland").firstMatch
+        XCTAssertTrue(topComboItem.waitForExistence(timeout: 5.0))
+        XCTAssertTrue(topComboItem.isHittable)
+        
+        let bottomComboItem = app.staticTexts.matching(identifier: "China").firstMatch
+        XCTAssertTrue(bottomComboItem.waitForExistence(timeout: 5.0))
+        XCTAssertTrue(bottomComboItem.isHittable)
+    }
+    
+    func test_dropDown_items_are_visible_when_comboBox_at_the_bottom_of_the_screen_is_tapped() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.textFields["BottomComboBox"].tap()
+        
+        let topComboItem = app.staticTexts.matching(identifier: "Poland").firstMatch
+        XCTAssertTrue(topComboItem.waitForExistence(timeout: 5.0))
+        XCTAssertTrue(topComboItem.isHittable)
+        
+        let bottomComboItem = app.staticTexts.matching(identifier: "China").firstMatch
+        XCTAssertTrue(bottomComboItem.waitForExistence(timeout: 5.0))
+        XCTAssertTrue(bottomComboItem.isHittable)
     }
 
     /*

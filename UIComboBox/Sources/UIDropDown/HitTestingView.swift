@@ -11,21 +11,15 @@ final class HitTestingView: UIView {
     
     private let hitTestCallback: (CGPoint, UIEvent?) -> UIView?
     
-    private weak var dropDown2: UIView?
+    private weak var dropDownContainer: UIView?
     private weak var anchorView: UIView?
     
-    init(_ dropDown2: UIView?, _ anchorView: UIView?, hitTestCallback: @escaping (CGPoint, UIEvent?) -> UIView?) {
-        self.dropDown2 = dropDown2
+    init(_ dropDownContainer: UIView?, _ anchorView: UIView?, hitTestCallback: @escaping (CGPoint, UIEvent?) -> UIView?) {
+        self.dropDownContainer = dropDownContainer
         self.anchorView = anchorView
         self.hitTestCallback = hitTestCallback
         super.init(frame: .zero)
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //backgroundColor = .clear
-        if #available(iOS 13.0, *) {
-            backgroundColor = UIColor(cgColor: CGColor(red: 0.0, green: 0.5, blue: 0.0, alpha: 0.2))
-        } else {
-            backgroundColor = .clear
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -33,7 +27,7 @@ final class HitTestingView: UIView {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        for view in [dropDown2, anchorView].compactMap({ $0 }) {
+        for view in [dropDownContainer, anchorView].compactMap({ $0 }) {
             let point = self.convert(point, to:view)
             if let result = view.hitTest(point, with:event) {
                 return result

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27AD4EAF2CBA80A300DA1C6F /* SampleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */; };
 		27C781A92C5214F50077E10C /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C781A82C5214F50077E10C /* CustomTableViewCell.swift */; };
 		6E01A38A0E9D16A01D9869D5 /* Pods_UIComboBoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF5C95CEA5806E5CDA61D21 /* Pods_UIComboBoxTests.framework */; };
 		816C73742BA4A7D700FD9E28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C73732BA4A7D700FD9E28 /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTableView.swift; sourceTree = "<group>"; };
 		27C781A82C5214F50077E10C /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		3DA9B95DF8EEDFE4CEF0B7EA /* Pods-UIComboBoxApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxApp.release.xcconfig"; path = "Target Support Files/Pods-UIComboBoxApp/Pods-UIComboBoxApp.release.xcconfig"; sourceTree = "<group>"; };
 		3DF569CC90F4FDA0C84E6999 /* Pods-UIComboBoxApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxApp.debug.xcconfig"; path = "Target Support Files/Pods-UIComboBoxApp/Pods-UIComboBoxApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				816C73732BA4A7D700FD9E28 /* AppDelegate.swift */,
 				816C73752BA4A7D700FD9E28 /* SceneDelegate.swift */,
 				816C73772BA4A7D700FD9E28 /* ViewController.swift */,
+				27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */,
 				816C73792BA4A7D700FD9E28 /* Main.storyboard */,
 				816C737C2BA4A7D900FD9E28 /* Assets.xcassets */,
 				816C737E2BA4A7D900FD9E28 /* LaunchScreen.storyboard */,
@@ -424,6 +427,7 @@
 				816C73782BA4A7D700FD9E28 /* ViewController.swift in Sources */,
 				816C73742BA4A7D700FD9E28 /* AppDelegate.swift in Sources */,
 				27C781A92C5214F50077E10C /* CustomTableViewCell.swift in Sources */,
+				27AD4EAF2CBA80A300DA1C6F /* SampleTableView.swift in Sources */,
 				816C73762BA4A7D700FD9E28 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

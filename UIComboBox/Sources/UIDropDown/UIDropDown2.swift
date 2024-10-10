@@ -9,11 +9,11 @@ import Foundation
 
 open class UIDropDown2: NSObject {
     
-
     weak var delegate2: UIDropDown2Delegate?
     private var propertyObservations = [NSKeyValueObservation]()
     private var showDropDownAnimator: UIViewPropertyAnimator?
     private var showDropDownDelayTimer: Timer?
+    private var showLaterWorkItem: DispatchWorkItem?
     private var isKeyboardVisible = false
     private var keyboardFrame = CGRect.zero
     internal weak var anchorView: UITextField? //<----- do we need it? maybe it can be private ?
@@ -48,8 +48,6 @@ open class UIDropDown2: NSObject {
     private var _separatorStyle: UITableViewCell.SeparatorStyle = .singleLine
     
     private func createTableView() -> UITableView {
-        NSLog("--- Creating table view")
-
         let view = UITableView()
         view.autoresizingMask = []
         view.frame = .zero
@@ -91,7 +89,6 @@ open class UIDropDown2: NSObject {
         tearDown()
     }
     
-    private weak var previousFrontView: UIView?
     private func setUp(_ anchorView: UITextField, _ window: UIWindow) {
         hideOnScroll(of: anchorView)
         anchorView.superview?.bringSubviewToFront(anchorView)
@@ -119,6 +116,10 @@ open class UIDropDown2: NSObject {
         _tableView?.removeFromSuperview()
         _tableView = nil
         dismissingView.removeFromSuperview()
+    }
+    
+    private var isHidden: Bool {
+        _tableView == nil
     }
     
     private func layout(_ anchorView: UITextField, _ window: UIWindow, _ animate: Bool, _ delay: TimeInterval) {
@@ -166,8 +167,7 @@ open class UIDropDown2: NSObject {
         if let scrollView = currentView as? UIScrollView {
             let observation = scrollView.observe(\.contentOffset, options: [.old, .new]) { [weak self] object, change in
                 if change.newValue != change.oldValue {
-                    print("Property changed from \(change.oldValue) to \(change.newValue)")
-                    self?.hide()
+                    self?.hideIfNeededAndShowLater()
                 }
             }
             self.propertyObservations.append(observation)
@@ -201,6 +201,21 @@ open class UIDropDown2: NSObject {
         }
     }
     
+    
+    private func hideIfNeededAndShowLater() {
+        if !isHidden {
+            hide()
+        } else {
+            guard let showLaterWorkItem = self.showLaterWorkItem else { return }
+            showLaterWorkItem.cancel()
+        }
+        let dispatchWorkItem = DispatchWorkItem { [weak self] in
+            self?.show()
+            self?.showLaterWorkItem = nil
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: dispatchWorkItem)
+        self.showLaterWorkItem = dispatchWorkItem
+    }
 }
 
 // MARK: - UI customisation

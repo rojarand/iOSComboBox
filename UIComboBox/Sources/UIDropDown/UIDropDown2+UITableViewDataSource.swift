@@ -9,10 +9,15 @@ import Foundation
 
 extension UIDropDown2: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let objectValue: Any = delegate2?.dropDown(self, objectValueForItemAt: indexPath.row) ?? "\(indexPath.row)"
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = "\(objectValue)"
-        return cell
+        if delegate2?.responds(to: #selector(UIDropDown2Delegate.dropDown(_:cellProvider:cellForRowAt:))) == true {
+            let cellProvider = UITableViewCellProvider(tableView: tableView)
+            return (delegate2?.dropDown?(self, cellProvider: cellProvider, cellForRowAt: indexPath.row))!
+        } else {
+            let objectValue: Any = delegate2?.dropDown(self, objectValueForItemAt: indexPath.row) ?? "\(indexPath.row)"
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.textLabel?.text = "\(objectValue)"
+            return cell
+        }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

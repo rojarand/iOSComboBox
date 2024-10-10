@@ -7,10 +7,22 @@
 
 import Foundation
 
-public protocol UIDropDown2Delegate: AnyObject {
-    func numberOfRows(in dropDown: UIDropDown2) -> Int
-    func dropDown(_ dropDown2: UIDropDown2, objectValueForItemAt index: Int) -> Any?
-    func dropDown(_ dropDown2: UIDropDown2, didSelectRowAt: IndexPath)
+public class UITableViewCellProvider: NSObject {
+    private let tableView: UITableView
+    init(tableView: UITableView) {
+        self.tableView = tableView
+    }
+    public func dequeCell<T: UITableViewCell>(atRow row: Int) -> T {
+        tableView.dequeueReusableCell(withIdentifier: String(describing: T.self), for: IndexPath(row: row, section: 0)) as! T
+    }
+}
+
+@objc public protocol UIDropDown2Delegate: NSObjectProtocol {
+    @objc @MainActor func numberOfRows(in dropDown: UIDropDown2) -> Int
+    @objc @MainActor func dropDown(_ dropDown2: UIDropDown2, objectValueForItemAt index: Int) -> Any?
+    @objc @MainActor func dropDown(_ dropDown2: UIDropDown2, didSelectRowAt: IndexPath)
+    @objc @MainActor optional func dropDown(_ dropDown2: UIDropDown2, cellProvider: UITableViewCellProvider, cellForRowAt position: Int) -> UITableViewCell
+    @objc @MainActor optional func dropDown(_ dropDown2: UIDropDown2, heightForRowAt position: Int) -> CGFloat
 }
 
 extension UITableView {

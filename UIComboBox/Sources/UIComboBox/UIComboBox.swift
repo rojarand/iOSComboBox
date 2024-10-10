@@ -25,6 +25,11 @@ open class UIComboBox: UITextField {
     private func setUp() {
         self.delegate = self
         self.isAccessibilityElement = false
+        
+    }
+    
+    public func register<T: UITableViewCell>(cell: T.Type) {
+        dropDown.register(cell: cell)
     }
     
     /*
