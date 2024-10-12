@@ -1,5 +1,5 @@
 //
-//  UIDropDown2.swift
+//  UIDropDown.swift
 //  UIComboBox
 //
 //  Created by Robert Andrzejczyk on 30/07/2024.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-open class UIDropDown2: NSObject {
+open class UIDropDown: NSObject {
     
-    weak var delegate2: UIDropDown2Delegate?
+    weak var delegate: UIDropDownDelegate?
     private var propertyObservations = [NSKeyValueObservation]()
     private var showDropDownAnimator: UIViewPropertyAnimator?
     private var showDropDownDelayTimer: Timer?
@@ -220,7 +220,7 @@ open class UIDropDown2: NSObject {
 
 // MARK: - UI customisation
 
-extension UIDropDown2 {
+extension UIDropDown {
     var cornerRadius: CGFloat {
         get {
             tableViewContainer.layer.cornerRadius
@@ -281,7 +281,7 @@ extension UIDropDown2 {
 
 // MARK: - Keyboard handling
 
-extension UIDropDown2 {
+extension UIDropDown {
     
     @objc private func keyboardWillShow(_ notification: Notification) {
         isKeyboardVisible = true

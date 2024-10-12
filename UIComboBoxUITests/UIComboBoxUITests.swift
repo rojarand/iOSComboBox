@@ -66,13 +66,13 @@ final class UIComboBoxUITests: XCTestCase {
         app.launch()
         app.textFields["TopComboBox"].tap()
 
-        let topComboItem = app.staticTexts.matching(identifier: "Poland").firstMatch
-        XCTAssertTrue(topComboItem.waitForExistence(timeout: 5.0))
-        XCTAssertTrue(topComboItem.isHittable)
+        let topDropDownItem = app.staticTexts.matching(identifier: "Poland").firstMatch
+        XCTAssertTrue(topDropDownItem.waitForExistence(timeout: 5.0))
+        XCTAssertTrue(topDropDownItem.isHittable)
         
-        let bottomComboItem = app.staticTexts.matching(identifier: "China").firstMatch
-        XCTAssertTrue(bottomComboItem.waitForExistence(timeout: 5.0))
-        XCTAssertTrue(bottomComboItem.isHittable)
+        let bottomDropDownItem = app.staticTexts.matching(identifier: "China").firstMatch
+        XCTAssertTrue(bottomDropDownItem.waitForExistence(timeout: 5.0))
+        XCTAssertTrue(bottomDropDownItem.isHittable)
     }
     
     func test_dropDown_items_are_visible_when_comboBox_at_the_bottom_of_the_screen_is_tapped() throws {
@@ -80,13 +80,13 @@ final class UIComboBoxUITests: XCTestCase {
         app.launch()
         app.textFields["BottomComboBox"].tap()
         
-        let topComboItem = app.staticTexts.matching(identifier: "Poland").firstMatch
-        XCTAssertTrue(topComboItem.waitForExistence(timeout: 5.0))
-        XCTAssertTrue(topComboItem.isHittable)
+        let topDropDownItem = app.staticTexts.matching(identifier: "Poland").firstMatch
+        XCTAssertTrue(topDropDownItem.waitForExistence(timeout: 5.0))
+        XCTAssertTrue(topDropDownItem.isHittable)
         
-        let bottomComboItem = app.staticTexts.matching(identifier: "China").firstMatch
-        XCTAssertTrue(bottomComboItem.waitForExistence(timeout: 5.0))
-        XCTAssertTrue(bottomComboItem.isHittable)
+        let bottomDropDownItem = app.staticTexts.matching(identifier: "China").firstMatch
+        XCTAssertTrue(bottomDropDownItem.waitForExistence(timeout: 5.0))
+        XCTAssertTrue(bottomDropDownItem.isHittable)
     }
 
     /*

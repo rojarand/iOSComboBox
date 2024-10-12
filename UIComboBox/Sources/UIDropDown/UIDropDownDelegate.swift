@@ -1,5 +1,5 @@
 //
-//  UIDropDown2Delegate.swift
+//  UIDropDownDelegate.swift
 //  Pods
 //
 //  Created by Robert Andrzejczyk on 10/08/2024.
@@ -17,12 +17,12 @@ public class UITableViewCellProvider: NSObject {
     }
 }
 
-@objc public protocol UIDropDown2Delegate: NSObjectProtocol {
-    @objc @MainActor func numberOfRows(in dropDown: UIDropDown2) -> Int
-    @objc @MainActor func dropDown(_ dropDown2: UIDropDown2, objectValueForItemAt index: Int) -> Any?
-    @objc @MainActor func dropDown(_ dropDown2: UIDropDown2, didSelectRowAt: IndexPath)
-    @objc @MainActor optional func dropDown(_ dropDown2: UIDropDown2, cellProvider: UITableViewCellProvider, cellForRowAt position: Int) -> UITableViewCell
-    @objc @MainActor optional func dropDown(_ dropDown2: UIDropDown2, heightForRowAt position: Int) -> CGFloat
+@objc public protocol UIDropDownDelegate: NSObjectProtocol {
+    @objc @MainActor func numberOfRows(in dropDown: UIDropDown) -> Int
+    @objc @MainActor func dropDown(_ dropDown: UIDropDown, objectValueForItemAt index: Int) -> Any?
+    @objc @MainActor func dropDown(_ dropDown: UIDropDown, didSelectRowAt: IndexPath)
+    @objc @MainActor optional func dropDown(_ dropDown: UIDropDown, cellProvider: UITableViewCellProvider, cellForRowAt position: Int) -> UITableViewCell
+    @objc @MainActor optional func dropDown(_ dropDown: UIDropDown, heightForRowAt position: Int) -> CGFloat
 }
 
 extension UITableView {

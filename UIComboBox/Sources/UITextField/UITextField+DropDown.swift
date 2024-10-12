@@ -11,12 +11,12 @@ private var associatedDropDownKey: UInt8 = 0
 
 extension UITextField {
     
-    internal var dropDown: UIDropDown2 {
+    internal var dropDown: UIDropDown {
         get {
-            if let dropDown = objc_getAssociatedObject(self, &associatedDropDownKey) as? UIDropDown2 {
+            if let dropDown = objc_getAssociatedObject(self, &associatedDropDownKey) as? UIDropDown {
                 return dropDown
             } else {
-                let dropDown = UIDropDown2(anchorView: self)
+                let dropDown = UIDropDown(anchorView: self)
                 objc_setAssociatedObject(self, &associatedDropDownKey, dropDown, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                 return dropDown
             }

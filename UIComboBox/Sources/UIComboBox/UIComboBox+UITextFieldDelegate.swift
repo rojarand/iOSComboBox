@@ -9,13 +9,13 @@ import Foundation
 
 extension UIComboBox: UITextFieldDelegate {
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        dropDown.delegate2 = self
+        dropDown.delegate = self
         dropDown.show()
         return true
     }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        dropDown.delegate2 = self
+        dropDown.delegate = self
         dropDown.show()
         return true
     }
