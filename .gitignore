@@ -10,3 +10,5 @@ Pods
 # Other
 *~
 .DS_Store
+
+tmp/
