@@ -80,7 +80,7 @@ open class UIDropDown: NSObject {
     }
     
     private func showDropDown(animate: Bool, delay: TimeInterval) {
-        guard let anchorView = self.anchorView, let window = anchorView.window else { return }
+        guard let anchorView = self.anchorView, let window = anchorView.window, anchorView.isFirstResponder else { return }
         setUp(anchorView, window)
         layout(anchorView, window, animate, delay)
     }
