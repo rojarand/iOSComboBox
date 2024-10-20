@@ -10,13 +10,19 @@ import UIComboBox
 
 class ViewController: UIViewController {
     
+    private let minBottomOffset = 20.0
     private var topComboBox = UIComboBox()
     private var bottomComboBox = UIComboBox()
     private var tableView = SampleTableView()
     private var items: [ListItem] = []
+    private var bottomLayoutConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         view.backgroundColor = .white
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,6 +43,8 @@ class ViewController: UIViewController {
             comboBox.comboBoxDelegate = self
         }
         
+        bottomLayoutConstraint = bottomComboBox.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -minBottomOffset)
+        
         NSLayoutConstraint.activate([
             topComboBox.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             topComboBox.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -49,10 +57,19 @@ class ViewController: UIViewController {
             bottomComboBox.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
             bottomComboBox.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             bottomComboBox.widthAnchor.constraint(equalToConstant: 200),
-            bottomComboBox.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            bottomLayoutConstraint,
         ])
         
         tableView.reloadData()
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? .zero
+        bottomLayoutConstraint.constant = -keyboardFrame.height - minBottomOffset
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        bottomLayoutConstraint.constant = -minBottomOffset
     }
 }
 

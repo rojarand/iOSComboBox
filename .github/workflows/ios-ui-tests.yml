@@ -36,6 +36,18 @@ jobs:
         bundle exec pod install
       shell: bash
 
+    - name: Print selected Xcode
+      run: xcode-select --print-path
+
+    - name: List applications
+      run: sudo ls -alh /Applications/
+
+    - name: Select Xcode version
+      run: sudo xcode-select -s /Applications/Xcode_15.0.1.app
+
+    - name: Print selected Xcode 2
+      run: xcode-select --print-path
+
     - run: echo "🖥️ The workflow is now ready to test your code on the runner."
     
     - name: Run UI tests with Fastlane

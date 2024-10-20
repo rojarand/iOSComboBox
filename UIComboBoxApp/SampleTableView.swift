@@ -40,6 +40,7 @@ class SampleTableView: UITableView, UITableViewDelegate, UITableViewDataSource  
                 self?.scrollUp(after: 1.5)
             }),
         ]
+        
         items.append(ListItem(type: .text("This is a text cell no 1")))
         items.append(ListItem(type: .comboBox(["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"])))
         //add some cells to make the table scrollable
