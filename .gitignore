@@ -12,3 +12,5 @@ Pods
 .DS_Store
 
 tmp/
+
+fastlane/report.xml

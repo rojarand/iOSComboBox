@@ -1,0 +1,43 @@
+name: iOS UI Tests
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+    - name: Set up Ruby 3
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0  # Specify Ruby version 3.0.x
+
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+      shell: bash
+
+    - run: echo "bundler:"
+    - run: which bundler
+
+    - name: Install Fastlane
+      run: bundle install
+
+    - name: Set up CocoaPods (if you use them)
+      run: |
+        bundle exec pod install
+      shell: bash
+
+    - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+    
+    - name: Run UI tests with Fastlane
+      run: bundle exec fastlane run_ui_tests
+      shell: bash

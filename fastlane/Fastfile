@@ -35,7 +35,7 @@ platform :ios do
   # Run tests for the pod library
   # ------------------------------------------
   desc "Run tests for the pod library"
-  lane :perform_tests do
+  lane :run_ui_tests do
     scheme = "UIComboBoxUITests"  # Replace with the name of the library's scheme
 
     # Run tests using xcodebuild
@@ -57,6 +57,6 @@ platform :ios do
   lane :test do
     lint_podspec   # Lint the podspec
     build_example  # Build the example project
-    perform_tests      # Run the tests
+    run_ui_tests      # Run the tests
   end
 end
