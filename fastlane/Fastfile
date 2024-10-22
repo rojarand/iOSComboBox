@@ -25,7 +25,7 @@ platform :ios do
 
     # Build the example project
     gym(
-      workspace: "UIComboBox.xcworkspace",  # Path to your example workspace
+      workspace: "UIComboBox.xcworkspace",
       scheme: scheme,
       clean: true
     )
@@ -36,7 +36,7 @@ platform :ios do
   # ------------------------------------------
   desc "Run tests for the pod library"
   lane :run_ui_tests do
-    scheme = "UIComboBoxUITests"  # Replace with the name of the library's scheme
+    scheme = "UIComboBoxUITests"
 
     # Run tests using xcodebuild
     scan(
@@ -45,7 +45,8 @@ platform :ios do
       clean: true,
       devices: ["iPhone 15"],
       skip_build: false,
-
+      output_directory: "./fastlane/test_output", # Directory for test reports
+      result_bundle: true,
       derived_data_path: "/tmp"
     )
   end

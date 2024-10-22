@@ -53,3 +53,9 @@ jobs:
     - name: Run UI tests with Fastlane
       run: bundle exec fastlane run_ui_tests
       shell: bash
+
+    - name: Upload .xcresult bundle
+      uses: actions/upload-artifact@v3
+      with:
+        name: ui-test-xcresult
+        path: fastlane/test_output/*.xcresult   # Upload the .xcresult file

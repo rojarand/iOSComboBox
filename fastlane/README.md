@@ -31,10 +31,10 @@ Lint the podspec
 
 Build the project
 
-### ios perform_tests
+### ios run_ui_tests
 
 ```sh
-[bundle exec] fastlane ios perform_tests
+[bundle exec] fastlane ios run_ui_tests
 ```
 
 Run tests for the pod library
