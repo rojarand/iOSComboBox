@@ -6,14 +6,14 @@ platform :ios, '12.0'
 
 install! 'cocoapods', :disable_input_output_paths => true, :share_schemes_for_development_pods => true
 
-target 'UIComboBoxApp' do
-    pod 'UIComboBox', :path => '.'
+target 'iOSComboBoxApp' do
+    pod 'iOSComboBox', :path => '.'
 end 
 
-target 'UIComboBoxTests' do
-    pod 'UIComboBox', :path => '.'
+target 'iOSComboBoxTests' do
+    pod 'iOSComboBox', :path => '.'
 end
 
-target 'UIComboBoxUITests' do
-    pod 'UIComboBox', :path => '.'
+target 'iOSComboBoxUITests' do
+    pod 'iOSComboBox', :path => '.'
 end

@@ -1,0 +1,804 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27AD4EAF2CBA80A300DA1C6F /* SampleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */; };
+		27C781A92C5214F50077E10C /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C781A82C5214F50077E10C /* CustomTableViewCell.swift */; };
+		35F553D05E5B5140C1FA6B94 /* Pods_iOSComboBoxUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E0A394233CEFC9AEE2EEF4 /* Pods_iOSComboBoxUITests.framework */; };
+		656D49484D5EAAB13355721F /* Pods_iOSComboBoxApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24182A7FD70096BF9F768BFC /* Pods_iOSComboBoxApp.framework */; };
+		74D9D3D1A50BC418310E2E76 /* Pods_iOSComboBoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA97C1A1772BE77697CFA0 /* Pods_iOSComboBoxTests.framework */; };
+		816C73742BA4A7D700FD9E28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C73732BA4A7D700FD9E28 /* AppDelegate.swift */; };
+		816C73762BA4A7D700FD9E28 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C73752BA4A7D700FD9E28 /* SceneDelegate.swift */; };
+		816C73782BA4A7D700FD9E28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C73772BA4A7D700FD9E28 /* ViewController.swift */; };
+		816C737B2BA4A7D700FD9E28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 816C73792BA4A7D700FD9E28 /* Main.storyboard */; };
+		816C737D2BA4A7D900FD9E28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 816C737C2BA4A7D900FD9E28 /* Assets.xcassets */; };
+		816C73802BA4A7D900FD9E28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 816C737E2BA4A7D900FD9E28 /* LaunchScreen.storyboard */; };
+		816C738B2BA4A7D900FD9E28 /* iOSComboBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C738A2BA4A7D900FD9E28 /* iOSComboBoxTests.swift */; };
+		816C73952BA4A7D900FD9E28 /* iOSComboBoxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C73942BA4A7D900FD9E28 /* iOSComboBoxUITests.swift */; };
+		816C73972BA4A7D900FD9E28 /* iOSComboBoxUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C73962BA4A7D900FD9E28 /* iOSComboBoxUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		816C73872BA4A7D900FD9E28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 816C73682BA4A7D700FD9E28 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 816C736F2BA4A7D700FD9E28;
+			remoteInfo = UIComboBox;
+		};
+		816C73912BA4A7D900FD9E28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 816C73682BA4A7D700FD9E28 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 816C736F2BA4A7D700FD9E28;
+			remoteInfo = UIComboBox;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		05E0A394233CEFC9AEE2EEF4 /* Pods_iOSComboBoxUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSComboBoxUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14EA97C1A1772BE77697CFA0 /* Pods_iOSComboBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSComboBoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24182A7FD70096BF9F768BFC /* Pods_iOSComboBoxApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSComboBoxApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTableView.swift; sourceTree = "<group>"; };
+		27C781A82C5214F50077E10C /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		3DA9B95DF8EEDFE4CEF0B7EA /* Pods-UIComboBoxApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxApp.release.xcconfig"; path = "Target Support Files/Pods-UIComboBoxApp/Pods-UIComboBoxApp.release.xcconfig"; sourceTree = "<group>"; };
+		3DF569CC90F4FDA0C84E6999 /* Pods-UIComboBoxApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxApp.debug.xcconfig"; path = "Target Support Files/Pods-UIComboBoxApp/Pods-UIComboBoxApp.debug.xcconfig"; sourceTree = "<group>"; };
+		4D5060CA17EE1DCBAAA15FE7 /* Pods-UIComboBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxTests.debug.xcconfig"; path = "Target Support Files/Pods-UIComboBoxTests/Pods-UIComboBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6BD27FF193AC5ADF9E15CC11 /* Pods-iOSComboBoxApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSComboBoxApp.release.xcconfig"; path = "Target Support Files/Pods-iOSComboBoxApp/Pods-iOSComboBoxApp.release.xcconfig"; sourceTree = "<group>"; };
+		7944D95633591489C50D4E59 /* Pods-iOSComboBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSComboBoxTests.release.xcconfig"; path = "Target Support Files/Pods-iOSComboBoxTests/Pods-iOSComboBoxTests.release.xcconfig"; sourceTree = "<group>"; };
+		816C73702BA4A7D700FD9E28 /* iOSComboBoxApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSComboBoxApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		816C73732BA4A7D700FD9E28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		816C73752BA4A7D700FD9E28 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		816C73772BA4A7D700FD9E28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		816C737A2BA4A7D700FD9E28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		816C737C2BA4A7D900FD9E28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		816C737F2BA4A7D900FD9E28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		816C73812BA4A7D900FD9E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		816C73862BA4A7D900FD9E28 /* iOSComboBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSComboBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		816C738A2BA4A7D900FD9E28 /* iOSComboBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSComboBoxTests.swift; sourceTree = "<group>"; };
+		816C73902BA4A7D900FD9E28 /* iOSComboBoxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSComboBoxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		816C73942BA4A7D900FD9E28 /* iOSComboBoxUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSComboBoxUITests.swift; sourceTree = "<group>"; };
+		816C73962BA4A7D900FD9E28 /* iOSComboBoxUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSComboBoxUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		853D2B109857EA4FCE9FD578 /* Pods-UIComboBoxUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxUITests.debug.xcconfig"; path = "Target Support Files/Pods-UIComboBoxUITests/Pods-UIComboBoxUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		87565AED793DB0E2F742712C /* Pods-iOSComboBoxApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSComboBoxApp.debug.xcconfig"; path = "Target Support Files/Pods-iOSComboBoxApp/Pods-iOSComboBoxApp.debug.xcconfig"; sourceTree = "<group>"; };
+		893B2B958DBC091FB2A2A652 /* Pods-iOSComboBoxUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSComboBoxUITests.debug.xcconfig"; path = "Target Support Files/Pods-iOSComboBoxUITests/Pods-iOSComboBoxUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		8D96478C14FC29CCE04B9804 /* Pods-iOSComboBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSComboBoxTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSComboBoxTests/Pods-iOSComboBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AA592F7427896D822F477FBB /* Pods-UIComboBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxTests.release.xcconfig"; path = "Target Support Files/Pods-UIComboBoxTests/Pods-UIComboBoxTests.release.xcconfig"; sourceTree = "<group>"; };
+		D4AEE830B3A1B7C9E6B5406F /* Pods-iOSComboBoxUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSComboBoxUITests.release.xcconfig"; path = "Target Support Files/Pods-iOSComboBoxUITests/Pods-iOSComboBoxUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E9DC8DB2DE9DD0F15902E428 /* Pods-UIComboBoxUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxUITests.release.xcconfig"; path = "Target Support Files/Pods-UIComboBoxUITests/Pods-UIComboBoxUITests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		816C736D2BA4A7D700FD9E28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				656D49484D5EAAB13355721F /* Pods_iOSComboBoxApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		816C73832BA4A7D900FD9E28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74D9D3D1A50BC418310E2E76 /* Pods_iOSComboBoxTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		816C738D2BA4A7D900FD9E28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35F553D05E5B5140C1FA6B94 /* Pods_iOSComboBoxUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07FA66ED12A28A9091F1F4BC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3DF569CC90F4FDA0C84E6999 /* Pods-UIComboBoxApp.debug.xcconfig */,
+				3DA9B95DF8EEDFE4CEF0B7EA /* Pods-UIComboBoxApp.release.xcconfig */,
+				4D5060CA17EE1DCBAAA15FE7 /* Pods-UIComboBoxTests.debug.xcconfig */,
+				AA592F7427896D822F477FBB /* Pods-UIComboBoxTests.release.xcconfig */,
+				853D2B109857EA4FCE9FD578 /* Pods-UIComboBoxUITests.debug.xcconfig */,
+				E9DC8DB2DE9DD0F15902E428 /* Pods-UIComboBoxUITests.release.xcconfig */,
+				87565AED793DB0E2F742712C /* Pods-iOSComboBoxApp.debug.xcconfig */,
+				6BD27FF193AC5ADF9E15CC11 /* Pods-iOSComboBoxApp.release.xcconfig */,
+				8D96478C14FC29CCE04B9804 /* Pods-iOSComboBoxTests.debug.xcconfig */,
+				7944D95633591489C50D4E59 /* Pods-iOSComboBoxTests.release.xcconfig */,
+				893B2B958DBC091FB2A2A652 /* Pods-iOSComboBoxUITests.debug.xcconfig */,
+				D4AEE830B3A1B7C9E6B5406F /* Pods-iOSComboBoxUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4597D3240CF9577D829C7FE0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24182A7FD70096BF9F768BFC /* Pods_iOSComboBoxApp.framework */,
+				14EA97C1A1772BE77697CFA0 /* Pods_iOSComboBoxTests.framework */,
+				05E0A394233CEFC9AEE2EEF4 /* Pods_iOSComboBoxUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		816C73672BA4A7D700FD9E28 = {
+			isa = PBXGroup;
+			children = (
+				816C73722BA4A7D700FD9E28 /* iOSComboBoxApp */,
+				816C73892BA4A7D900FD9E28 /* iOSComboBoxTests */,
+				816C73932BA4A7D900FD9E28 /* iOSComboBoxUITests */,
+				816C73712BA4A7D700FD9E28 /* Products */,
+				07FA66ED12A28A9091F1F4BC /* Pods */,
+				4597D3240CF9577D829C7FE0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		816C73712BA4A7D700FD9E28 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				816C73702BA4A7D700FD9E28 /* iOSComboBoxApp.app */,
+				816C73862BA4A7D900FD9E28 /* iOSComboBoxTests.xctest */,
+				816C73902BA4A7D900FD9E28 /* iOSComboBoxUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		816C73722BA4A7D700FD9E28 /* iOSComboBoxApp */ = {
+			isa = PBXGroup;
+			children = (
+				816C73732BA4A7D700FD9E28 /* AppDelegate.swift */,
+				816C73752BA4A7D700FD9E28 /* SceneDelegate.swift */,
+				816C73772BA4A7D700FD9E28 /* ViewController.swift */,
+				27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */,
+				816C73792BA4A7D700FD9E28 /* Main.storyboard */,
+				816C737C2BA4A7D900FD9E28 /* Assets.xcassets */,
+				816C737E2BA4A7D900FD9E28 /* LaunchScreen.storyboard */,
+				816C73812BA4A7D900FD9E28 /* Info.plist */,
+				27C781A82C5214F50077E10C /* CustomTableViewCell.swift */,
+			);
+			path = iOSComboBoxApp;
+			sourceTree = "<group>";
+		};
+		816C73892BA4A7D900FD9E28 /* iOSComboBoxTests */ = {
+			isa = PBXGroup;
+			children = (
+				816C738A2BA4A7D900FD9E28 /* iOSComboBoxTests.swift */,
+			);
+			path = iOSComboBoxTests;
+			sourceTree = "<group>";
+		};
+		816C73932BA4A7D900FD9E28 /* iOSComboBoxUITests */ = {
+			isa = PBXGroup;
+			children = (
+				816C73942BA4A7D900FD9E28 /* iOSComboBoxUITests.swift */,
+				816C73962BA4A7D900FD9E28 /* iOSComboBoxUITestsLaunchTests.swift */,
+			);
+			path = iOSComboBoxUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		816C736F2BA4A7D700FD9E28 /* iOSComboBoxApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 816C739A2BA4A7D900FD9E28 /* Build configuration list for PBXNativeTarget "iOSComboBoxApp" */;
+			buildPhases = (
+				E3F68D616B4E8E36E0C6090D /* [CP] Check Pods Manifest.lock */,
+				816C736C2BA4A7D700FD9E28 /* Sources */,
+				816C736D2BA4A7D700FD9E28 /* Frameworks */,
+				816C736E2BA4A7D700FD9E28 /* Resources */,
+				2A23DECB7A9DAB1A8F53E5BE /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iOSComboBoxApp;
+			productName = UIComboBox;
+			productReference = 816C73702BA4A7D700FD9E28 /* iOSComboBoxApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		816C73852BA4A7D900FD9E28 /* iOSComboBoxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 816C739D2BA4A7D900FD9E28 /* Build configuration list for PBXNativeTarget "iOSComboBoxTests" */;
+			buildPhases = (
+				2E9C09A2F955186BC7331C99 /* [CP] Check Pods Manifest.lock */,
+				816C73822BA4A7D900FD9E28 /* Sources */,
+				816C73832BA4A7D900FD9E28 /* Frameworks */,
+				816C73842BA4A7D900FD9E28 /* Resources */,
+				8B8B24FFDFF3B0DE13F7BE84 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				816C73882BA4A7D900FD9E28 /* PBXTargetDependency */,
+			);
+			name = iOSComboBoxTests;
+			productName = UIComboBoxTests;
+			productReference = 816C73862BA4A7D900FD9E28 /* iOSComboBoxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		816C738F2BA4A7D900FD9E28 /* iOSComboBoxUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 816C73A02BA4A7D900FD9E28 /* Build configuration list for PBXNativeTarget "iOSComboBoxUITests" */;
+			buildPhases = (
+				588914B34EE22FDFE4E27C3A /* [CP] Check Pods Manifest.lock */,
+				816C738C2BA4A7D900FD9E28 /* Sources */,
+				816C738D2BA4A7D900FD9E28 /* Frameworks */,
+				816C738E2BA4A7D900FD9E28 /* Resources */,
+				AF113C0BB3F805D0B6EBA651 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				816C73922BA4A7D900FD9E28 /* PBXTargetDependency */,
+			);
+			name = iOSComboBoxUITests;
+			productName = UIComboBoxUITests;
+			productReference = 816C73902BA4A7D900FD9E28 /* iOSComboBoxUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		816C73682BA4A7D700FD9E28 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					816C736F2BA4A7D700FD9E28 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					816C73852BA4A7D900FD9E28 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 816C736F2BA4A7D700FD9E28;
+					};
+					816C738F2BA4A7D900FD9E28 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 816C736F2BA4A7D700FD9E28;
+					};
+				};
+			};
+			buildConfigurationList = 816C736B2BA4A7D700FD9E28 /* Build configuration list for PBXProject "iOSComboBox" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 816C73672BA4A7D700FD9E28;
+			productRefGroup = 816C73712BA4A7D700FD9E28 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				816C736F2BA4A7D700FD9E28 /* iOSComboBoxApp */,
+				816C73852BA4A7D900FD9E28 /* iOSComboBoxTests */,
+				816C738F2BA4A7D900FD9E28 /* iOSComboBoxUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		816C736E2BA4A7D700FD9E28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				816C73802BA4A7D900FD9E28 /* LaunchScreen.storyboard in Resources */,
+				816C737D2BA4A7D900FD9E28 /* Assets.xcassets in Resources */,
+				816C737B2BA4A7D700FD9E28 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		816C73842BA4A7D900FD9E28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		816C738E2BA4A7D900FD9E28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2A23DECB7A9DAB1A8F53E5BE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOSComboBoxApp/Pods-iOSComboBoxApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E9C09A2F955186BC7331C99 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOSComboBoxTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		588914B34EE22FDFE4E27C3A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOSComboBoxUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B8B24FFDFF3B0DE13F7BE84 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOSComboBoxTests/Pods-iOSComboBoxTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF113C0BB3F805D0B6EBA651 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOSComboBoxUITests/Pods-iOSComboBoxUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3F68D616B4E8E36E0C6090D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOSComboBoxApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		816C736C2BA4A7D700FD9E28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				816C73782BA4A7D700FD9E28 /* ViewController.swift in Sources */,
+				816C73742BA4A7D700FD9E28 /* AppDelegate.swift in Sources */,
+				27C781A92C5214F50077E10C /* CustomTableViewCell.swift in Sources */,
+				27AD4EAF2CBA80A300DA1C6F /* SampleTableView.swift in Sources */,
+				816C73762BA4A7D700FD9E28 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		816C73822BA4A7D900FD9E28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				816C738B2BA4A7D900FD9E28 /* iOSComboBoxTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		816C738C2BA4A7D900FD9E28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				816C73952BA4A7D900FD9E28 /* iOSComboBoxUITests.swift in Sources */,
+				816C73972BA4A7D900FD9E28 /* iOSComboBoxUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		816C73882BA4A7D900FD9E28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 816C736F2BA4A7D700FD9E28 /* iOSComboBoxApp */;
+			targetProxy = 816C73872BA4A7D900FD9E28 /* PBXContainerItemProxy */;
+		};
+		816C73922BA4A7D900FD9E28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 816C736F2BA4A7D700FD9E28 /* iOSComboBoxApp */;
+			targetProxy = 816C73912BA4A7D900FD9E28 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		816C73792BA4A7D700FD9E28 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				816C737A2BA4A7D700FD9E28 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		816C737E2BA4A7D900FD9E28 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				816C737F2BA4A7D900FD9E28 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		816C73982BA4A7D900FD9E28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		816C73992BA4A7D900FD9E28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		816C739B2BA4A7D900FD9E28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87565AED793DB0E2F742712C /* Pods-iOSComboBoxApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AM8RAYM6Z2;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iOSComboBoxApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.andro.iOSComboBox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		816C739C2BA4A7D900FD9E28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BD27FF193AC5ADF9E15CC11 /* Pods-iOSComboBoxApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AM8RAYM6Z2;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iOSComboBoxApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.andro.iOSComboBox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		816C739E2BA4A7D900FD9E28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D96478C14FC29CCE04B9804 /* Pods-iOSComboBoxTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.andro.iOSComboBoxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSComboBoxApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iOSComboBoxApp";
+			};
+			name = Debug;
+		};
+		816C739F2BA4A7D900FD9E28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7944D95633591489C50D4E59 /* Pods-iOSComboBoxTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.andro.iOSComboBoxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSComboBoxApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iOSComboBoxApp";
+			};
+			name = Release;
+		};
+		816C73A12BA4A7D900FD9E28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 893B2B958DBC091FB2A2A652 /* Pods-iOSComboBoxUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.andro.UIComboBoxUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOSComboBoxApp;
+			};
+			name = Debug;
+		};
+		816C73A22BA4A7D900FD9E28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4AEE830B3A1B7C9E6B5406F /* Pods-iOSComboBoxUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.andro.UIComboBoxUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOSComboBoxApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		816C736B2BA4A7D700FD9E28 /* Build configuration list for PBXProject "iOSComboBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				816C73982BA4A7D900FD9E28 /* Debug */,
+				816C73992BA4A7D900FD9E28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		816C739A2BA4A7D900FD9E28 /* Build configuration list for PBXNativeTarget "iOSComboBoxApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				816C739B2BA4A7D900FD9E28 /* Debug */,
+				816C739C2BA4A7D900FD9E28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		816C739D2BA4A7D900FD9E28 /* Build configuration list for PBXNativeTarget "iOSComboBoxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				816C739E2BA4A7D900FD9E28 /* Debug */,
+				816C739F2BA4A7D900FD9E28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		816C73A02BA4A7D900FD9E28 /* Build configuration list for PBXNativeTarget "iOSComboBoxUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				816C73A12BA4A7D900FD9E28 /* Debug */,
+				816C73A22BA4A7D900FD9E28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 816C73682BA4A7D700FD9E28 /* Project object */;
+}

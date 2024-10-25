@@ -6,7 +6,7 @@ platform :ios do
   # ---------------------
   desc "Lint the podspec" #run: bundle exec fastlane lint_podspec
   lane :lint_podspec do
-    podspec = "UIComboBox.podspec"
+    podspec = "iOSComboBox.podspec"
 
     # CocoaPods Lint: Ensure the podspec is valid
     pod_lib_lint(
@@ -21,11 +21,11 @@ platform :ios do
   # -------------------------
   desc "Build the project"
   lane :build do
-    scheme = "UIComboBoxApp" 
+    scheme = "iOSComboBoxApp" 
 
     # Build the example project
     gym(
-      workspace: "UIComboBox.xcworkspace",
+      workspace: "iOSComboBox.xcworkspace",
       scheme: scheme,
       clean: true
     )
@@ -36,11 +36,11 @@ platform :ios do
   # ------------------------------------------
   desc "Run tests for the pod library"
   lane :run_ui_tests do
-    scheme = "UIComboBoxUITests"
+    scheme = "iOSComboBoxUITests"
 
     # Run tests using xcodebuild
     scan(
-      workspace: "UIComboBox.xcworkspace", 
+      workspace: "iOSComboBox.xcworkspace", 
       scheme: scheme,
       clean: true,
       devices: ["iPhone 15"],

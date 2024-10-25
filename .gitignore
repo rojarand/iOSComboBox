@@ -2,6 +2,8 @@
 **/*.xcodeproj/xcuserdata/
 **/*.xcworkspace/xcuserdata/
 
+iOSComboBox.xcworkspace
+
 Pods
 
 # vim
