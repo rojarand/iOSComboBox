@@ -9,8 +9,8 @@ import Foundation
 
 open class iOSComboBox: UITextField {
     
-    public weak var comboBoxDataSource: iOSComboBoxDataSource?
-    public weak var comboBoxDelegate: ComboBoxDelegate?
+    @objc public weak var comboBoxDataSource: iOSComboBoxDataSource?
+    @objc public weak var comboBoxDelegate: iOSComboBoxDelegate?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,21 +28,12 @@ open class iOSComboBox: UITextField {
         
     }
     
-    public func register<T: UITableViewCell>(cell: T.Type) {
-        dropDown.register(cell: cell)
+    //convenience method for swift
+    public func register<T: UITableViewCell>(cellClass: T.Type) {
+        dropDown.register(cellClass: cellClass)
     }
     
-    /*
-    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if let result = super.hitTest(point, with:event) {
-            return result
-        }
-        for subview in self.subviews.reversed() {
-            let point = self.convert(point, to:subview)
-            if let result = subview.hitTest(point, with:event) {
-                return result
-            }
-        }
-        return nil
-    }*/
+    @objc public func registerCellClass(_ cellClass: AnyClass, forCellReuseIdentifier identifier: String) {
+        dropDown.registerCellClass(cellClass, forCellReuseIdentifier: identifier)
+    }
 }

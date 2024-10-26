@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct CellMetadata {
+    let cellClass: AnyClass
+    let identifier: String
+}
+
 open class iOSDropDown: NSObject {
     
     weak var delegate: iOSDropDownDelegate?
@@ -44,7 +49,7 @@ open class iOSDropDown: NSObject {
         return tableView
     }
     
-    private var cellClasses = [AnyClass]()
+    private var cellsMetadata = [CellMetadata]()
     private var _separatorStyle: UITableViewCell.SeparatorStyle = .singleLine
     
     private func createTableView() -> UITableView {
@@ -57,8 +62,8 @@ open class iOSDropDown: NSObject {
         view.separatorInset = .zero
         view.separatorStyle = _separatorStyle
         view.layer.cornerRadius = tableViewContainer.layer.cornerRadius
-        cellClasses.forEach { cellClass in
-            view.register(cellClass, forCellReuseIdentifier: String(describing: cellClass))
+        cellsMetadata.forEach { cellClass in
+            view.register(cellClass.cellClass.self, forCellReuseIdentifier: cellClass.identifier)
         }
         return view
     }
@@ -70,17 +75,26 @@ open class iOSDropDown: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    public func register<T: UITableViewCell>(cell: T.Type) {
-        cellClasses.append(cell)
-        tableView.register(T.self, forCellReuseIdentifier: String(describing: T.self))
+    public func register<T: UITableViewCell>(cellClass: T.Type) {
+        register(cellMetadata: CellMetadata(cellClass: cellClass, identifier: String(describing: T.self)))
+    }
+    
+    @objc public func registerCellClass(_ cellClass: AnyClass, forCellReuseIdentifier identifier: String) {
+        register(cellMetadata: CellMetadata(cellClass: cellClass, identifier: identifier))
+    }
+    
+    private func register(cellMetadata: CellMetadata) {
+        cellsMetadata.append(cellMetadata)
+        tableView.register(cellMetadata.cellClass.self, forCellReuseIdentifier: cellMetadata.identifier)
     }
     
     func show() {
         showDropDown(animate: _tableView == nil, delay: _tableView == nil ? 0.0 : 0.5)
     }
     
-    private func showDropDown(animate: Bool, delay: TimeInterval) {
-        guard let anchorView = self.anchorView, let window = anchorView.window, anchorView.isFirstResponder else { return }
+    private func showDropDown(animate: Bool, delay: TimeInterval, requiresFirstResponder: Bool = false) {
+        guard let anchorView = self.anchorView, let window = anchorView.window,
+                ((requiresFirstResponder && anchorView.isFirstResponder) || !requiresFirstResponder) else { return }
         setUp(anchorView, window)
         layout(anchorView, window, animate, delay)
     }
@@ -290,7 +304,7 @@ extension iOSDropDown {
         showDropDownAnimator?.stopAnimation(true)
         showDropDownDelayTimer?.invalidate()
         showDropDownDelayTimer = Timer.scheduledTimer(withTimeInterval: showDropDownDelay, repeats: false) { [weak self] _ in
-            self?.showDropDown(animate: true, delay: 0.0)
+            self?.showDropDown(animate: true, delay: 0.0, requiresFirstResponder: true)
         }
     }
     

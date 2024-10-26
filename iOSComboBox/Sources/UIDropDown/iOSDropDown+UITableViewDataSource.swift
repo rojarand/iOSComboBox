@@ -9,9 +9,9 @@ import Foundation
 
 extension iOSDropDown: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if delegate?.responds(to: #selector(iOSDropDownDelegate.dropDown(_:cellProvider:cellForRowAt:))) == true {
+        if delegate?.responds(to: #selector(iOSDropDownDelegate.dropDown(_:cellProvider:forRowAt:))) == true {
             let cellProvider = UITableViewCellProvider(tableView: tableView)
-            return (delegate?.dropDown?(self, cellProvider: cellProvider, cellForRowAt: indexPath.row))!
+            return (delegate?.dropDown?(self, cellProvider: cellProvider, forRowAt: indexPath.row))!
         } else {
             let objectValue: Any = delegate?.dropDown(self, objectValueForItemAt: indexPath.row) ?? "\(indexPath.row)"
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
@@ -26,5 +26,23 @@ extension iOSDropDown: UITableViewDataSource {
     
     public func numberOfSections(in tableView: UITableView) -> Int {
         1
+    }
+    
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if delegate?.responds(to: #selector(iOSDropDownDelegate.dropDown(_:commit:forRowAt:))) == true {
+            if delegate?.responds(to: #selector(iOSDropDownDelegate.dropDown(_:canEditRowAt:))) == true {
+                return (delegate?.dropDown?(self, canEditRowAt: indexPath.row))!
+            } else {
+                return true
+            }
+        }
+        return false
+    }
+    
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if delegate?.responds(to: #selector(iOSDropDownDelegate.dropDown(_:commit:forRowAt:))) == true {
+            delegate?.dropDown?(self, commit: editingStyle, forRowAt: indexPath.row)
+            tableView.reloadData()
+        }
     }
 }

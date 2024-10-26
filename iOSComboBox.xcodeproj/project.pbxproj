@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		276725A32CCCDE0000024155 /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 276725A22CCCDE0000024155 /* ContactTableViewCell.m */; };
 		27AD4EAF2CBA80A300DA1C6F /* SampleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */; };
 		27C781A92C5214F50077E10C /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C781A82C5214F50077E10C /* CustomTableViewCell.swift */; };
+		27EEB7542CCBF291006E483B /* ObjcViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EEB7522CCBF291006E483B /* ObjcViewController.m */; };
+		27EEB7552CCBF291006E483B /* ObjcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27EEB7532CCBF291006E483B /* ObjcViewController.xib */; };
 		35F553D05E5B5140C1FA6B94 /* Pods_iOSComboBoxUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E0A394233CEFC9AEE2EEF4 /* Pods_iOSComboBoxUITests.framework */; };
 		656D49484D5EAAB13355721F /* Pods_iOSComboBoxApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24182A7FD70096BF9F768BFC /* Pods_iOSComboBoxApp.framework */; };
 		74D9D3D1A50BC418310E2E76 /* Pods_iOSComboBoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA97C1A1772BE77697CFA0 /* Pods_iOSComboBoxTests.framework */; };
@@ -44,8 +47,14 @@
 		05E0A394233CEFC9AEE2EEF4 /* Pods_iOSComboBoxUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSComboBoxUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		14EA97C1A1772BE77697CFA0 /* Pods_iOSComboBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSComboBoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24182A7FD70096BF9F768BFC /* Pods_iOSComboBoxApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSComboBoxApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		276725A12CCCDE0000024155 /* ContactTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
+		276725A22CCCDE0000024155 /* ContactTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
 		27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTableView.swift; sourceTree = "<group>"; };
 		27C781A82C5214F50077E10C /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		27EEB7502CCBF290006E483B /* iOSComboBoxApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSComboBoxApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		27EEB7512CCBF291006E483B /* ObjcViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcViewController.h; sourceTree = "<group>"; };
+		27EEB7522CCBF291006E483B /* ObjcViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcViewController.m; sourceTree = "<group>"; };
+		27EEB7532CCBF291006E483B /* ObjcViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObjcViewController.xib; sourceTree = "<group>"; };
 		3DA9B95DF8EEDFE4CEF0B7EA /* Pods-UIComboBoxApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxApp.release.xcconfig"; path = "Target Support Files/Pods-UIComboBoxApp/Pods-UIComboBoxApp.release.xcconfig"; sourceTree = "<group>"; };
 		3DF569CC90F4FDA0C84E6999 /* Pods-UIComboBoxApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxApp.debug.xcconfig"; path = "Target Support Files/Pods-UIComboBoxApp/Pods-UIComboBoxApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4D5060CA17EE1DCBAAA15FE7 /* Pods-UIComboBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIComboBoxTests.debug.xcconfig"; path = "Target Support Files/Pods-UIComboBoxTests/Pods-UIComboBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +129,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		276725A02CCCDDD600024155 /* objc */ = {
+			isa = PBXGroup;
+			children = (
+				27EEB7512CCBF291006E483B /* ObjcViewController.h */,
+				27EEB7522CCBF291006E483B /* ObjcViewController.m */,
+				27EEB7532CCBF291006E483B /* ObjcViewController.xib */,
+				276725A12CCCDE0000024155 /* ContactTableViewCell.h */,
+				276725A22CCCDE0000024155 /* ContactTableViewCell.m */,
+			);
+			path = objc;
+			sourceTree = "<group>";
+		};
 		4597D3240CF9577D829C7FE0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +176,7 @@
 		816C73722BA4A7D700FD9E28 /* iOSComboBoxApp */ = {
 			isa = PBXGroup;
 			children = (
+				276725A02CCCDDD600024155 /* objc */,
 				816C73732BA4A7D700FD9E28 /* AppDelegate.swift */,
 				816C73752BA4A7D700FD9E28 /* SceneDelegate.swift */,
 				816C73772BA4A7D700FD9E28 /* ViewController.swift */,
@@ -164,6 +186,7 @@
 				816C737E2BA4A7D900FD9E28 /* LaunchScreen.storyboard */,
 				816C73812BA4A7D900FD9E28 /* Info.plist */,
 				27C781A82C5214F50077E10C /* CustomTableViewCell.swift */,
+				27EEB7502CCBF290006E483B /* iOSComboBoxApp-Bridging-Header.h */,
 			);
 			path = iOSComboBoxApp;
 			sourceTree = "<group>";
@@ -259,6 +282,7 @@
 				TargetAttributes = {
 					816C736F2BA4A7D700FD9E28 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 					};
 					816C73852BA4A7D900FD9E28 = {
 						CreatedOnToolsVersion = 15.0;
@@ -295,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27EEB7552CCBF291006E483B /* ObjcViewController.xib in Resources */,
 				816C73802BA4A7D900FD9E28 /* LaunchScreen.storyboard in Resources */,
 				816C737D2BA4A7D900FD9E28 /* Assets.xcassets in Resources */,
 				816C737B2BA4A7D700FD9E28 /* Main.storyboard in Resources */,
@@ -436,7 +461,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27EEB7542CCBF291006E483B /* ObjcViewController.m in Sources */,
 				816C73782BA4A7D700FD9E28 /* ViewController.swift in Sources */,
+				276725A32CCCDE0000024155 /* ContactTableViewCell.m in Sources */,
 				816C73742BA4A7D700FD9E28 /* AppDelegate.swift in Sources */,
 				27C781A92C5214F50077E10C /* CustomTableViewCell.swift in Sources */,
 				27AD4EAF2CBA80A300DA1C6F /* SampleTableView.swift in Sources */,
@@ -621,6 +648,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AM8RAYM6Z2;
@@ -641,6 +669,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = eu.andro.iOSComboBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "iOSComboBoxApp/iOSComboBoxApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -652,6 +682,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AM8RAYM6Z2;
@@ -672,6 +703,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = eu.andro.iOSComboBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "iOSComboBoxApp/iOSComboBoxApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

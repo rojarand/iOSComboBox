@@ -38,15 +38,28 @@ class ViewController: UIViewController {
             comboBox.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(comboBox)
             comboBox.borderStyle = .roundedRect
-            comboBox.register(cell: CountryCell.self)
+            comboBox.register(cellClass: CountryCell.self)
             comboBox.comboBoxDataSource = self
             comboBox.comboBoxDelegate = self
         }
         
         bottomLayoutConstraint = bottomComboBox.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -minBottomOffset)
         
+        let goToObjcExampleButton = UIButton()
+        goToObjcExampleButton.setTitle("Go to objc example", for: .normal)
+        goToObjcExampleButton.setTitleColor(.blue, for: .normal)
+        goToObjcExampleButton.addTarget(self, action: #selector(goToObjcExample), for: .touchUpInside)
+        goToObjcExampleButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(goToObjcExampleButton)
+        
         NSLayoutConstraint.activate([
-            topComboBox.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            
+            goToObjcExampleButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            goToObjcExampleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            goToObjcExampleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            goToObjcExampleButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            topComboBox.topAnchor.constraint(equalTo: goToObjcExampleButton.bottomAnchor, constant: 20),
             topComboBox.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             topComboBox.widthAnchor.constraint(equalToConstant: 200),
             
@@ -61,6 +74,11 @@ class ViewController: UIViewController {
         ])
         
         tableView.reloadData()
+    }
+    
+    @objc private func goToObjcExample() {
+        let objcExampleVC = ObjcViewController()
+        self.navigationController?.pushViewController(objcExampleVC, animated: false)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -86,11 +104,11 @@ let CountryData: [(flag: UIImage?, countryName: String)] =
  (UIImage(named: "flag-cn"), "China"),
 ]
 
-extension ViewController: iOSComboBoxDataSource, ComboBoxDelegate {
+extension ViewController: iOSComboBoxDataSource, iOSComboBoxDelegate {
     
-    func comboBox(_ comboBox: iOSComboBox, cellProvider: UITableViewCellProvider, cellForRowAt position: Int) -> UITableViewCell {
-        let cell: CountryCell = cellProvider.dequeCell(atRow: position)
-        let (flag, countrName) = CountryData[position]
+    func comboBox(_ comboBox: iOSComboBox, cellProvider: UITableViewCellProvider, forRowAt index: Int) -> UITableViewCell {
+        let cell: CountryCell = cellProvider.dequeCell(atRow: index)
+        let (flag, countrName) = CountryData[index]
         cell.configure(with: flag, countryName: countrName)
         return cell
     }
@@ -103,7 +121,7 @@ extension ViewController: iOSComboBoxDataSource, ComboBoxDelegate {
         CountryData[index].countryName
     }
     
-    func comboBox(_ comboBox: iOSComboBox, heightForRowAt position: Int) -> CGFloat {
+    func comboBox(_ comboBox: iOSComboBox, heightForRowAt index: Int) -> CGFloat {
         30.0
     }
 }

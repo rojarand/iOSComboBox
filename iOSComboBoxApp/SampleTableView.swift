@@ -135,7 +135,7 @@ class TextCell: UITableViewCell {
 }
 
 // ComboBox cell
-class ComboBoxCell: UITableViewCell, iOSComboBoxDataSource, ComboBoxDelegate {
+class ComboBoxCell: UITableViewCell, iOSComboBoxDataSource, iOSComboBoxDelegate {
     static let identifier = "ComboBox"
     
     private let comboBox = iOSComboBox()
