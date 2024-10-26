@@ -9,11 +9,17 @@ import Foundation
 
 public class UITableViewCellProvider: NSObject {
     private let tableView: UITableView
+    
     init(tableView: UITableView) {
         self.tableView = tableView
     }
+    
     public func dequeCell<T: UITableViewCell>(atRow row: Int) -> T {
         tableView.dequeueReusableCell(withIdentifier: String(describing: T.self), for: IndexPath(row: row, section: 0)) as! T
+    }
+    
+    @objc public func dequeCell(atRow row: Int, withIdentifier identifier: String) -> UITableViewCell {
+        tableView.dequeueReusableCell(withIdentifier: identifier, for: IndexPath(row: row, section: 0))
     }
 }
 
@@ -21,8 +27,10 @@ public class UITableViewCellProvider: NSObject {
     @objc @MainActor func numberOfRows(in dropDown: iOSDropDown) -> Int
     @objc @MainActor func dropDown(_ dropDown: iOSDropDown, objectValueForItemAt index: Int) -> Any?
     @objc @MainActor func dropDown(_ dropDown: iOSDropDown, didSelectRowAt: IndexPath)
-    @objc @MainActor optional func dropDown(_ dropDown: iOSDropDown, cellProvider: UITableViewCellProvider, cellForRowAt position: Int) -> UITableViewCell
-    @objc @MainActor optional func dropDown(_ dropDown: iOSDropDown, heightForRowAt position: Int) -> CGFloat
+    @objc @MainActor optional func dropDown(_ dropDown: iOSDropDown, cellProvider: UITableViewCellProvider, forRowAt index: Int) -> UITableViewCell
+    @objc @MainActor optional func dropDown(_ dropDown: iOSDropDown, commit editingStyle: UITableViewCell.EditingStyle, forRowAt index: Int)
+    @objc @MainActor optional func dropDown(_ dropDown: iOSDropDown, canEditRowAt index: Int) -> Bool
+    @objc @MainActor optional func dropDown(_ dropDown: iOSDropDown, heightForRowAt index: Int) -> CGFloat
 }
 
 extension UITableView {

@@ -20,40 +20,45 @@ extension iOSComboBox: iOSDropDownDelegate {
         if let objectValue = comboBoxDataSource?.comboBox?(self, objectValueForItemAt: indexPath.row) {
             text = "\(objectValue)"
         }
-        if comboBoxDelegate?.responds(to: #selector(ComboBoxDelegate.comboBox(_:didSelectRowAt:))) == true {
+        if comboBoxDelegate?.responds(to: #selector(iOSComboBoxDelegate.comboBox(_:didSelectRowAt:))) == true {
             comboBoxDelegate?.comboBox?(self, didSelectRowAt: indexPath.row)
         }
     }
     
-    public func dropDown(_ dropDown: iOSDropDown, cellProvider: UITableViewCellProvider, cellForRowAt position: Int) -> UITableViewCell {
-        if comboBoxDataSource?.responds(to: #selector(iOSComboBoxDataSource.comboBox(_:cellProvider:cellForRowAt:))) == true {
-            return (comboBoxDataSource?.comboBox?(self, cellProvider: cellProvider, cellForRowAt: position))!
+    public func dropDown(_ dropDown: iOSDropDown, cellProvider: UITableViewCellProvider, forRowAt index: Int) -> UITableViewCell {
+        if comboBoxDataSource?.responds(to: #selector(iOSComboBoxDataSource.comboBox(_:cellProvider:forRowAt:))) == true {
+            return (comboBoxDataSource?.comboBox?(self, cellProvider: cellProvider, forRowAt: index))!
         } else {
-            let objectValue: Any = comboBoxDataSource?.comboBox?(self, objectValueForItemAt: position) ?? "\(position)"
+            let objectValue: Any = comboBoxDataSource?.comboBox?(self, objectValueForItemAt: index) ?? "\(index)"
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             cell.textLabel?.text = "\(objectValue)"
             return cell
         }
     }
     
-    public func dropDown(_ dropDown: iOSDropDown, heightForRowAt position: Int) -> CGFloat {
-        if comboBoxDelegate?.responds(to: #selector(ComboBoxDelegate.comboBox(_:heightForRowAt:))) == true {
-            return (comboBoxDelegate?.comboBox?(self, heightForRowAt: position))!
+    public func dropDown(_ dropDown: iOSDropDown, commit editingStyle: UITableViewCell.EditingStyle, forRowAt index: Int) {
+        if comboBoxDataSource?.responds(to: #selector(iOSComboBoxDataSource.comboBox(_:commit:forRowAt:))) == true {
+            comboBoxDataSource?.comboBox?(self, commit: editingStyle, forRowAt: index)
+        }
+    }
+    
+    public func dropDown(_ dropDown: iOSDropDown, canEditRowAt index: Int) -> Bool {
+        if comboBoxDataSource?.responds(to: #selector(iOSComboBoxDataSource.comboBox(_:commit:forRowAt:))) == true {
+            if comboBoxDataSource?.responds(to: #selector(iOSComboBoxDataSource.comboBox(_:canEditRowAt:))) == true {
+                return (comboBoxDataSource?.comboBox?(self, canEditRowAt: index))!
+            } else {
+                return true
+            }
+        } else {
+            return false
+        }
+    }
+    
+    public func dropDown(_ dropDown: iOSDropDown, heightForRowAt index: Int) -> CGFloat {
+        if comboBoxDelegate?.responds(to: #selector(iOSComboBoxDelegate.comboBox(_:heightForRowAt:))) == true {
+            return (comboBoxDelegate?.comboBox?(self, heightForRowAt: index))!
         } else {
             return DefaultDropDownCellHeight
         }
     }
-    
-    /*
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if delegate2?.responds(to: #selector(UIDropDownDelegate.dropDown(_:cellProvider:cellForRowAt:))) == true {
-            let cellProvider = UITableViewCellProvider(tableView: tableView)
-            return (delegate2?.dropDown?(self, cellProvider: cellProvider, cellForRowAt: indexPath.row))!
-        } else {
-            let objectValue: Any = delegate2?.dropDown(self, objectValueForItemAt: indexPath.row) ?? "\(indexPath.row)"
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            cell.textLabel?.text = "\(objectValue)"
-            return cell
-        }
-    }*/
 }

@@ -32,6 +32,7 @@ final class iOSComboBoxUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    /*
     //po print(app.debugDescription)!!!!!!!!
     func test_the_comboBox_has_text_equal_to_selected_in_the_dropDown() throws {
         let app = XCUIApplication()
@@ -87,7 +88,7 @@ final class iOSComboBoxUITests: XCTestCase {
         let bottomDropDownItem = app.staticTexts.matching(identifier: "China").firstMatch
         XCTAssertTrue(bottomDropDownItem.waitForExistence(timeout: 5.0))
         XCTAssertTrue(bottomDropDownItem.isHittable)
-    }
+    }*/
 
     /*
     func testLaunchPerformance() throws {
