@@ -5,7 +5,7 @@
 //  Created by Robert Andrzejczyk on 10/08/2024.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - UITableViewDelegate
 internal let DefaultDropDownCellHeight = 40.0

@@ -5,7 +5,7 @@
 //  Created by Robert Andrzejczyk on 30/07/2024.
 //
 
-import Foundation
+import UIKit
 
 struct CellMetadata {
     let cellClass: AnyClass

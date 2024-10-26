@@ -5,7 +5,7 @@
 //  Created by Robert Andrzejczyk on 10/08/2024.
 //
 
-import Foundation
+import UIKit
 
 @objc public protocol iOSComboBoxDataSource : NSObjectProtocol {
     
