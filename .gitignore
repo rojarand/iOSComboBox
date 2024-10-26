@@ -3,6 +3,8 @@
 **/*.xcworkspace/xcuserdata/
 
 iOSComboBox.xcworkspace
+.build
+.swiftpm
 
 Pods
 
