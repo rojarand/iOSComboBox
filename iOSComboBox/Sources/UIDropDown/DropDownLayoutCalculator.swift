@@ -5,7 +5,7 @@
 //  Created by Robert Andrzejczyk on 31/08/2024.
 //
 
-import Foundation
+import UIKit
 
 struct DropDownLayout {
     let initialFrame: CGRect

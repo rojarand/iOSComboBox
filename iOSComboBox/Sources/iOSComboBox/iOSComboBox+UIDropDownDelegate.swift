@@ -5,7 +5,7 @@
 //  Created by Robert Andrzejczyk on 10/08/2024.
 //
 
-import Foundation
+import UIKit
 
 extension iOSComboBox: iOSDropDownDelegate {
     public func numberOfRows(in dropDown: iOSDropDown) -> Int {
