@@ -8,22 +8,33 @@
 
 Pod::Spec.new do |s|
   s.name             = 'iOSComboBox'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of ComboBox...'
+  s.version          = '0.0.3'
+  s.summary          = 'A library that provides a customizable combo box (drop-down) view for iOS'
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.description      = <<-DESC
+    iOSComboBox is a custom UI component for iOS that provides a dropdown menu, 
+    similar to the combo box UI found on desktop applications. It allows users 
+    to select from a list of options within a compact, tappable interface, making 
+    it ideal for forms, settings screens, and selection menus in iOS applications. 
+    iOSComboBox is highly customizable, supporting a wide range of configuration 
+    options including custom colors, fonts, and animations. 
 
-  s.description      = 'A great library'
+    Key features include:
+    - Customizable dropdown appearance with adjustable colors, fonts, and sizes.
+    - Smooth animations for opening and closing the dropdown.
+    - Configurable max height to prevent overlap with other UI elements.
+    - Delegate support for handling item selection and other events.
+    - Easy integration with SwiftUI and UIKit.
 
-  s.homepage         = 'https://github.com/${USER_NAME}/${POD_NAME}'
+    iOSComboBox is designed to be lightweight, performant, and user-friendly, 
+    fitting seamlessly into modern iOS applications.
+DESC
+
+  s.homepage         = 'https://github.com/rojarand/iOSComboBox.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '${USER_NAME}' => '${USER_EMAIL}' }
-  s.source           = { :git => 'https://github.com/${USER_NAME}/${POD_NAME}.git', :tag => s.version.to_s }
+  s.source           = { :git => 'git@github.com:rojarand/iOSComboBox.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '12.0'
@@ -31,11 +42,4 @@ Pod::Spec.new do |s|
 
   s.source_files = 'iOSComboBox/Sources/**/*'
   
-  # s.resource_bundles = {
-  #   '${POD_NAME}' => ['${POD_NAME}/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
