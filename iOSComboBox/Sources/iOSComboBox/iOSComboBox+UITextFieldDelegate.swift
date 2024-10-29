@@ -7,16 +7,34 @@
 
 import UIKit
 
-extension iOSComboBox: UITextFieldDelegate {
-    public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        dropDown.delegate = self
-        dropDown.show()
-        return true
+// MARK: - Proxy Delegate
+
+class ComboBoxDelegateProxy: NSObject, UITextFieldDelegate {
+    
+    weak var originalDelegate: UITextFieldDelegate?
+    weak var comboBox: iOSComboBox?
+    
+    init(comboBox: iOSComboBox) {
+        self.comboBox = comboBox
     }
     
-    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        dropDown.delegate = self
-        dropDown.show()
-        return true
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        comboBox?.dropDown.show()
+        return originalDelegate?.textFieldShouldBeginEditing?(textField) ?? true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        comboBox?.dropDown.show()
+        originalDelegate?.textFieldDidEndEditing?(textField)
+    }
+    
+    // Forward any other UITextFieldDelegate methods to the original delegate
+    override func responds(to aSelector: Selector!) -> Bool {
+        (originalDelegate?.responds(to: aSelector) ?? false) || super.responds(to: aSelector)
+    }
+    
+    override func forwardingTarget(for aSelector: Selector!) -> Any? {
+        originalDelegate
     }
 }
+
