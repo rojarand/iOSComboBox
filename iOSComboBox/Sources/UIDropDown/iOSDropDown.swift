@@ -21,7 +21,7 @@ open class iOSDropDown: NSObject {
     private var showLaterWorkItem: DispatchWorkItem?
     private var isKeyboardVisible = false
     private var keyboardFrame = CGRect.zero
-    internal weak var anchorView: UITextField? //<----- do we need it? maybe it can be private ?
+    internal weak var anchorView: UITextField?
     private lazy var dismissingView: UIView = {
         let view = HitTestingView(tableViewContainer, anchorView) { [weak self] _, _ in
             self?.hide()
@@ -83,6 +83,10 @@ open class iOSDropDown: NSObject {
         register(cellMetadata: CellMetadata(cellClass: cellClass, identifier: identifier))
     }
     
+    func reloadData() {
+        _tableView?.reloadData()
+    }
+    
     private func register(cellMetadata: CellMetadata) {
         cellsMetadata.append(cellMetadata)
         tableView.register(cellMetadata.cellClass.self, forCellReuseIdentifier: cellMetadata.identifier)
@@ -93,6 +97,7 @@ open class iOSDropDown: NSObject {
     }
     
     private func showDropDown(animate: Bool, delay: TimeInterval, requiresFirstResponder: Bool = false) {
+        NSLog("showDropDown")
         guard let anchorView = self.anchorView, let window = anchorView.window,
                 ((requiresFirstResponder && anchorView.isFirstResponder) || !requiresFirstResponder) else { return }
         setUp(anchorView, window)

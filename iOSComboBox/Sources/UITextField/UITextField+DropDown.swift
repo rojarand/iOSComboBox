@@ -7,7 +7,7 @@
 
 import UIKit
 
-private var associatedDropDownKey: UInt8 = 0
+private var associatedDropDownKey: UInt = 0xC0B0C0B0
 
 extension UITextField {
     
@@ -22,4 +22,5 @@ extension UITextField {
             }
         }
     }
+    
 }

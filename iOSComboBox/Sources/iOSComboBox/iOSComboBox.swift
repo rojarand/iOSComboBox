@@ -12,6 +12,14 @@ open class iOSComboBox: UITextField {
     @objc public weak var comboBoxDataSource: iOSComboBoxDataSource?
     @objc public weak var comboBoxDelegate: iOSComboBoxDelegate?
     
+    // MARK: - Properties
+    private var proxyDelegate: ComboBoxDelegateProxy!
+    weak var textFieldDelegate: UITextFieldDelegate? {
+        didSet {
+            proxyDelegate.originalDelegate = textFieldDelegate
+        }
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
@@ -23,9 +31,10 @@ open class iOSComboBox: UITextField {
     }
     
     private func setUp() {
-        self.delegate = self
-        self.isAccessibilityElement = false
-        
+        proxyDelegate = ComboBoxDelegateProxy(comboBox: self)
+        super.delegate = proxyDelegate
+        dropDown.delegate = self
+        isAccessibilityElement = false
     }
     
     //convenience method for swift
@@ -35,5 +44,16 @@ open class iOSComboBox: UITextField {
     
     @objc public func registerCellClass(_ cellClass: AnyClass, forCellReuseIdentifier identifier: String) {
         dropDown.registerCellClass(cellClass, forCellReuseIdentifier: identifier)
+    }
+    
+    public override var delegate: UITextFieldDelegate? {
+        didSet {
+            textFieldDelegate = delegate
+            super.delegate = proxyDelegate
+        }
+    }
+    
+    @objc public func reloadData() {
+        dropDown.reloadData()
     }
 }

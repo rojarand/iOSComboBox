@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ObjcViewController : UIViewController <iOSComboBoxDataSource, iOSComboBoxDelegate>
+@interface ObjcViewController : UIViewController <iOSComboBoxDataSource, iOSComboBoxDelegate, UITextFieldDelegate>
 
 @end
 
