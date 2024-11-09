@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'iOSComboBox'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = 'A library that provides a customizable combo box (drop-down) view for iOS'
 
   s.description      = <<-DESC
@@ -33,7 +33,7 @@ DESC
   s.homepage         = 'https://github.com/rojarand/iOSComboBox.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '${USER_NAME}' => '${USER_EMAIL}' }
+  s.author           = { 'Robert Andrzejczyk' => 'robert.andrzejczyk@gmail.com' }
   s.source           = { :git => 'git@github.com:rojarand/iOSComboBox.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 

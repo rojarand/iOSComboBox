@@ -21,6 +21,7 @@ static NSString* ContactCellIdentifier = @"ContactCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"Objc + StoryBoard";
     
     _contacts = [NSMutableArray arrayWithObjects:
                  @"Oliver Smith",
