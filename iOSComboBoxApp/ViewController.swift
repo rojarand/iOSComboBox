@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         bottomLayoutConstraint = bottomComboBox.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -minBottomOffset)
         
         let goToObjcExampleButton = UIButton()
-        goToObjcExampleButton.setTitle("Go to objc example", for: .normal)
+        goToObjcExampleButton.setTitle("Objc + StoryBoard", for: .normal)
         goToObjcExampleButton.setTitleColor(.blue, for: .normal)
         goToObjcExampleButton.addTarget(self, action: #selector(goToObjcExample), for: .touchUpInside)
         goToObjcExampleButton.translatesAutoresizingMaskIntoConstraints = false

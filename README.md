@@ -5,7 +5,6 @@
 ## Features
 
 - Customizable appearance
-- Supports both static and dynamic data
 - Smooth animations for the dropdown
 - Easy integration with both Storyboard and programmatically
 - Swift and Objective-C compatibility
@@ -14,7 +13,7 @@
 
 - iOS 12.0+v
 - Swift 5.0+
-- Xcode 12.0+
+- Xcode 15.0+
 
 ## Installation
 
@@ -36,7 +35,7 @@ To integrate iOSComboBox using CocoaPods, follow these steps:
 
 1. Add iOSComboBox to your `Podfile`:
 ```yaml
-pod 'iOSComboBox', '~> 0.0.3'
+pod 'iOSComboBox', '~> 0.0.4'
 ```
 2. Install the pod by running the following command in your terminal:
 ```terminal
@@ -48,35 +47,52 @@ pod 'iOSComboBox', '~> 0.0.3'
 
 ### Programmatic Usage
 
-Here's an example of how to use iOSComboBox programmatically:
+Here's an example of how to use iOSComboBox programmatically in Swift:
 ```swift
 import iOSComboBox
 
-let comboBox = iOSComboBox(frame: CGRect(x: 20, y: 100, width: 280, height: 40))
-comboBox.items = ["Option 1", "Option 2", "Option 3"]
-comboBox.placeholder = "Select an option"
-comboBox.onSelectionChanged = { selectedItem in
-    print("Selected: \(selectedItem)")
+class ViewController: UIViewController {
+    override func viewDidLoad() {
+        let comboBox = iOSComboBox(frame: CGRect(x: 20, y: 100, width: 200, height: 40))
+        self.view.addSubview(comboBox)
+        comboBox.comboBoxDataSource = self
+        comboBox.comboBoxDelegate = self
+        comboBox.placeholder = "Select an option"
+    }
 }
-self.view.addSubview(comboBox)
+
+extension ViewController: iOSComboBoxDataSource {
+    func numberOfItems(in comboBox: iOSComboBox) -> Int {
+        5
+    }
+    func comboBox(_ comboBox: iOSComboBox, objectValueForItemAt index: Int) -> Any? {
+        "Option \(index+1)"
+    }
+}
 ```
+
+Result:
+
+<img src="readme-resources/simple-options.png" style="width: 25%; height: auto;">
+
 
 ### Storyboard Usage
 1. Drag a UIView onto your storyboard.
 2. Set its class to iOSComboBox in the Identity Inspector.
+
+<img src="readme-resources/class-identity-inspector.png" style="width: 25%; height: auto;">
+
 3. Configure the control's properties in the Attributes Inspector or programmatically.
 
-#### Connecting to Your Code
-```swift
-@IBOutlet weak var comboBox: iOSComboBox!
+#### Connecting to Your Code (Objective-C)
+```objc
+@property (weak, nonatomic) IBOutlet iOSComboBox *comboBox;
 
-override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    comboBox.items = ["Item 1", "Item 2", "Item 3"]
-    comboBox.onSelectionChanged = { selectedItem in
-        print("Selected item: \(selectedItem)")
-    }
+- (void)viewDidLoad {
+    ...
+    //Assuming that the view controller implements iOSComboBoxDataSource and iOSComboBoxDelegate protocols
+    _comboBox.comboBoxDataSource = self;
+    _comboBox.comboBoxDelegate = self;
 }
 ```
 
@@ -84,13 +100,16 @@ override func viewDidLoad() {
 
 **iOSComboBox** allows you to customize various aspects of the control:
 
-**Items**: Set the items in the dropdown using the `items` property.
-**Placeholder**: Set placeholder text using the `placeholder` property.
+**iOSComboBoxDataSource**: Provides various optional methods for interacting with the iOSComboBox, allowing developers to provide the necessary data and behavior for the combo box. The `iOSComboBoxDataSource` is similar to the well known `UITableViewDataSource` interface.
+
+**iOSComboBoxDelegate**: Is designed to handle events and interactions with an iOSComboBox. The delegate provides methods that allow you to respond to user actions or system events, such as selection changes, and other UI-related behaviors. The `iOSComboBoxDelegate` is similar to the well known `UITableViewDelegate` interface.
+
 **Dropdown Appearance**: Customize the dropdown's height, font, and colors.
-**Selection Callback**: Use the `onSelectionChanged` closure to handle selection changes.
 
 ## Example
 To explore a full example, check out the iOSComboBoxApp folder in this repository, which demonstrates how to integrate and use iOSComboBox in various scenarios.
+
+<img src="readme-resources/objc-storybaord-example.gif" style="width: 30%; height: auto;">
 
 ## License
 iOSComboBox is released under the MIT license. See [LICENSE](https://en.wikipedia.org/wiki/MIT_License) for details.
