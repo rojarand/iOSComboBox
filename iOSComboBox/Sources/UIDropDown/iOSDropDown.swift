@@ -84,7 +84,8 @@ open class iOSDropDown: NSObject {
     }
     
     func reloadData() {
-        _tableView?.reloadData()
+        guard let anchorView = self.anchorView, let window = anchorView.window, !isHidden else { return }
+        layout(anchorView: anchorView, window: window, animate: false, delay: 0)
     }
     
     private func register(cellMetadata: CellMetadata) {
@@ -97,11 +98,10 @@ open class iOSDropDown: NSObject {
     }
     
     private func showDropDown(animate: Bool, delay: TimeInterval, requiresFirstResponder: Bool = false) {
-        NSLog("showDropDown")
         guard let anchorView = self.anchorView, let window = anchorView.window,
                 ((requiresFirstResponder && anchorView.isFirstResponder) || !requiresFirstResponder) else { return }
         setUp(anchorView, window)
-        layout(anchorView, window, animate, delay)
+        layout(anchorView: anchorView, window: window, animate: animate, delay: delay)
     }
     
     public func hide() {
@@ -109,7 +109,7 @@ open class iOSDropDown: NSObject {
     }
     
     private func setUp(_ anchorView: UITextField, _ window: UIWindow) {
-        hideOnScroll(of: anchorView)
+        hideOnScrollOfViewIfNeeded(anchorView)
         anchorView.superview?.bringSubviewToFront(anchorView)
         if dismissingView.superview == nil {
             window.addSubview(dismissingView)
@@ -135,13 +135,14 @@ open class iOSDropDown: NSObject {
         _tableView?.removeFromSuperview()
         _tableView = nil
         dismissingView.removeFromSuperview()
+        propertyObservations.removeAll()
     }
     
     private var isHidden: Bool {
         _tableView == nil
     }
     
-    private func layout(_ anchorView: UITextField, _ window: UIWindow, _ animate: Bool, _ delay: TimeInterval) {
+    private func layout(anchorView: UITextField, window: UIWindow, animate: Bool, delay: TimeInterval) {
         let dropDownLayout = calculateDropDownLayout()
         prepareTableView(offscreenHeight: dropDownLayout.offscreenHeight)
         layoutDropDown(using: dropDownLayout)
@@ -181,6 +182,11 @@ open class iOSDropDown: NSObject {
         }
     }
     
+    private func hideOnScrollOfViewIfNeeded(_ view: UIView?) {
+        if propertyObservations.isEmpty {
+            hideOnScroll(of: view)
+        }
+    }
     private func hideOnScroll(of view: UIView?) {
         guard let currentView = view else { return }
         if let scrollView = currentView as? UIScrollView {
