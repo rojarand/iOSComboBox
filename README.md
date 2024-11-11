@@ -31,7 +31,7 @@ https://github.com/rojarand/iOSComboBox.git
 
 ### CocoaPods
 
-To integrate iOSComboBox using CocoaPods, follow these steps:
+To integrate [iOSComboBox](https://cocoapods.org/pods/iOSComboBox) using CocoaPods, follow these steps:
 
 1. Add iOSComboBox to your `Podfile`:
 ```yaml
@@ -109,7 +109,7 @@ Result:
 ## Example
 To explore a full example, check out the iOSComboBoxApp folder in this repository, which demonstrates how to integrate and use iOSComboBox in various scenarios.
 
-<img src="readme-resources/objc-storybaord-example.gif" style="width: 30%; height: auto;">
+<img src="readme-resources/objc-storybaord-example.gif" style="width: 40%; height: auto;">
 
 ## License
 iOSComboBox is released under the MIT license. See [LICENSE](https://en.wikipedia.org/wiki/MIT_License) for details.
