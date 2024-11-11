@@ -51,10 +51,16 @@ jobs:
     - run: echo "🖥️ The workflow is now ready to test your code on the runner."
     
     - name: Run UI tests with Fastlane
+      #continue-on-error: true  # Allow the step to continue even if tests fail
       run: bundle exec fastlane run_ui_tests
       shell: bash
 
+    - name: Check if tests failed
+      if: failure()  # Only execute if previous steps have failed
+      run: echo "Tests have failed, uploading a .xcresult file"
+
     - name: Upload .xcresult bundle
+      if: failure()  # Only upload if the tests failed
       uses: actions/upload-artifact@v3
       with:
         name: ui-test-xcresult
