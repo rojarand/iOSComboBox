@@ -24,7 +24,7 @@ class ComboBoxDelegateProxy: NSObject, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        comboBox?.dropDown.show()
+        comboBox?.dropDown.hide()
         originalDelegate?.textFieldDidEndEditing?(textField)
     }
     
