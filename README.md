@@ -1,4 +1,4 @@
-# iOSComboBox
+# iOSComboBox ![iOS UI Tests](https://github.com/rojarand/iOSComboBox/actions/workflows/ios-ui-tests.yml/badge.svg)
 
 **iOSComboBox** is a customizable combo box (drop-down) view for iOS, designed to provide a simple way to integrate a selection interface into your apps.
 
