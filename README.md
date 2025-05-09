@@ -1,4 +1,4 @@
-# iOSComboBox
+# iOSComboBox ![iOS UI Tests](https://github.com/rojarand/iOSComboBox/actions/workflows/ios-ui-tests.yml/badge.svg)
 
 **iOSComboBox** is a customizable combo box (drop-down) view for iOS, designed to provide a simple way to integrate a selection interface into your apps.
 
@@ -11,7 +11,7 @@
 
 ## Requirements
 
-- iOS 12.0+v
+- iOS 12.0+
 - Swift 5.0+
 - Xcode 15.0+
 
@@ -109,7 +109,7 @@ Result:
 ## Example
 To explore a full example, check out the iOSComboBoxApp folder in this repository, which demonstrates how to integrate and use iOSComboBox in various scenarios.
 
-<img src="readme-resources/objc-storybaord-example.gif" style="width: 30%; height: auto;">
+<img src="readme-resources/objc-storybaord-example.gif" style="width: 300px; height: auto;">
 
 ## License
 iOSComboBox is released under the MIT license. See [LICENSE](https://en.wikipedia.org/wiki/MIT_License) for details.
