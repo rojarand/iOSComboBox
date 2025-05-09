@@ -14,10 +14,10 @@ jobs:
 
     - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
-    - name: Set up Ruby 3
+    - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0  # Specify Ruby version 3.0.x
+        ruby-version: 3.1.7
 
     - name: Install dependencies
       run: |
@@ -31,7 +31,7 @@ jobs:
     - name: Install Fastlane
       run: bundle install
 
-    - name: Set up CocoaPods (if you use them)
+    - name: Set up CocoaPods
       run: |
         bundle exec pod install
       shell: bash
@@ -43,7 +43,7 @@ jobs:
       run: sudo ls -alh /Applications/
 
     - name: Select Xcode version
-      run: sudo xcode-select -s /Applications/Xcode_15.0.1.app
+      run: sudo xcode-select -s /Applications/Xcode_16.2.app
 
     - name: Print selected Xcode 2
       run: xcode-select --print-path
@@ -55,7 +55,7 @@ jobs:
       shell: bash
 
     - name: Upload .xcresult bundle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ui-test-xcresult
         path: fastlane/test_output/*.xcresult   # Upload the .xcresult file
