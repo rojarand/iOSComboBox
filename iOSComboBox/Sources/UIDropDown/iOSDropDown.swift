@@ -15,6 +15,7 @@ struct CellMetadata {
 open class iOSDropDown: NSObject {
     
     weak var delegate: iOSDropDownDelegate?
+    private static let dropDownWillShowNotification = Notification.Name("DropDownWillShow")
     private var propertyObservations = [NSKeyValueObservation]()
     private var showDropDownAnimator: UIViewPropertyAnimator?
     private var showDropDownDelayTimer: Timer?
@@ -73,6 +74,11 @@ open class iOSDropDown: NSObject {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDropDownWillShow(_:)), name: iOSDropDown.dropDownWillShowNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     public func register<T: UITableViewCell>(cellClass: T.Type) {
@@ -100,6 +106,7 @@ open class iOSDropDown: NSObject {
     private func showDropDown(animate: Bool, delay: TimeInterval, requiresFirstResponder: Bool = false) {
         guard let anchorView = self.anchorView, let window = anchorView.window,
                 ((requiresFirstResponder && anchorView.isFirstResponder) || !requiresFirstResponder) else { return }
+        notifyDropDownWillShow()
         setUp(anchorView, window)
         layout(anchorView: anchorView, window: window, animate: animate, delay: delay)
     }
@@ -187,6 +194,7 @@ open class iOSDropDown: NSObject {
             hideOnScroll(of: view)
         }
     }
+    
     private func hideOnScroll(of view: UIView?) {
         guard let currentView = view else { return }
         if let scrollView = currentView as? UIScrollView {
@@ -198,6 +206,17 @@ open class iOSDropDown: NSObject {
             self.propertyObservations.append(observation)
         }
         hideOnScroll(of: currentView.superview)
+    }
+    
+    private func notifyDropDownWillShow() {
+        NotificationCenter.default.post(name: iOSDropDown.dropDownWillShowNotification, object: self)
+    }
+    
+    @objc func handleDropDownWillShow(_ notification: Notification) {
+        guard let sender = notification.object as AnyObject? else { return }
+        if self !== sender {
+            hide()
+        }
     }
     
     private var dropDownFrame: CGRect {
@@ -225,7 +244,6 @@ open class iOSDropDown: NSObject {
             return window.bounds.maxY - verticalMargin
         }
     }
-    
     
     private func hideIfNeededAndShowLater() {
         if !isHidden {
