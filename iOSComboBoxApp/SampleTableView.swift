@@ -41,11 +41,11 @@ class SampleTableView: UITableView, UITableViewDelegate, UITableViewDataSource  
             }),
         ]
         
-        items.append(ListItem(type: .text("This is a text cell no 1")))
+        items.append(ListItem(type: .text("")))
         items.append(ListItem(type: .comboBox(["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"])))
         //add some cells to make the table scrollable
         for i in 1...20 {
-            items.append(ListItem(type: .text("This is a text cell no \(i+1)")))
+            items.append(ListItem(type: .text("")))
         }
         return items
     }
@@ -145,6 +145,9 @@ class ComboBoxCell: UITableViewCell, iOSComboBoxDataSource, iOSComboBoxDelegate 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         comboBox.translatesAutoresizingMaskIntoConstraints = false
         comboBox.borderStyle = .roundedRect
+        comboBox.layer.borderWidth = 1.0
+        comboBox.layer.borderColor = UIColor.gray.cgColor
+        comboBox.layer.cornerRadius = 8.0
         comboBox.placeholder = "Enter text here"
         contentView.addSubview(comboBox)
         

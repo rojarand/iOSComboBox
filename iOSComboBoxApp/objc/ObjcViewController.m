@@ -38,6 +38,10 @@ static NSString* ContactCellIdentifier = @"ContactCell";
     _filteredContacts = [_contacts mutableCopy];
         
     _contactsComboBox.borderStyle = UITextBorderStyleRoundedRect;
+    _contactsComboBox.layer.borderWidth = 1.0;
+    _contactsComboBox.layer.borderColor = [UIColor grayColor].CGColor;
+    _contactsComboBox.layer.cornerRadius = 8.0;
+    
     [_contactsComboBox registerCellClass:[ContactTableViewCell class] forCellReuseIdentifier:ContactCellIdentifier];
     _contactsComboBox.comboBoxDataSource = self;
     _contactsComboBox.comboBoxDelegate = self;
