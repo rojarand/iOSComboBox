@@ -74,6 +74,7 @@ open class iOSDropDown: NSObject {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleDropDownWillShow(_:)), name: iOSDropDown.dropDownWillShowNotification, object: nil)
     }
     
@@ -147,6 +148,12 @@ open class iOSDropDown: NSObject {
     
     private var isHidden: Bool {
         _tableView == nil
+    }
+    
+    private func repositionDropDownIfNeeded() {
+        if !isHidden {
+            showDropDown(animate: false, delay: 0.0, requiresFirstResponder: true)
+        }
     }
     
     private func layout(anchorView: UITextField, window: UIWindow, animate: Bool, delay: TimeInterval) {
@@ -340,6 +347,12 @@ extension iOSDropDown {
     @objc private func keyboardWillHide(_ notification: Notification) {
         isKeyboardVisible = false
         keyboardFrame = keyboardFrame(fromNotification: notification) ?? .zero
+    }
+    
+    @objc private func keyboardDidHide(_ notification: Notification) {
+        isKeyboardVisible = false
+        keyboardFrame = keyboardFrame(fromNotification: notification) ?? .zero
+        repositionDropDownIfNeeded()
     }
     
     private static var defaultKeyboardAnimationDuration: TimeInterval {
