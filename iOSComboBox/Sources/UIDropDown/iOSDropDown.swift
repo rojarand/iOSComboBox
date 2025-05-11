@@ -81,6 +81,14 @@ open class iOSDropDown: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
+    func show() {
+        showDropDown(animate: _tableView == nil, delay: isKeyboardVisible ? 0.0 : 0.5)
+    }
+    
+    public func hide() {
+        tearDown()
+    }
+    
     public func register<T: UITableViewCell>(cellClass: T.Type) {
         register(cellMetadata: CellMetadata(cellClass: cellClass, identifier: String(describing: T.self)))
     }
@@ -96,11 +104,7 @@ open class iOSDropDown: NSObject {
     
     private func register(cellMetadata: CellMetadata) {
         cellsMetadata.append(cellMetadata)
-        tableView.register(cellMetadata.cellClass.self, forCellReuseIdentifier: cellMetadata.identifier)
-    }
-    
-    func show() {
-        showDropDown(animate: _tableView == nil, delay: _tableView == nil ? 0.0 : 0.5)
+        _tableView?.register(cellMetadata.cellClass.self, forCellReuseIdentifier: cellMetadata.identifier)
     }
     
     private func showDropDown(animate: Bool, delay: TimeInterval, requiresFirstResponder: Bool = false) {
@@ -109,10 +113,6 @@ open class iOSDropDown: NSObject {
         notifyDropDownWillShow()
         setUp(anchorView, window)
         layout(anchorView: anchorView, window: window, animate: animate, delay: delay)
-    }
-    
-    public func hide() {
-        tearDown()
     }
     
     private func setUp(_ anchorView: UITextField, _ window: UIWindow) {
