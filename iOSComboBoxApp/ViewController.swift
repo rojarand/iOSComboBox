@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -38,6 +38,10 @@ class ViewController: UIViewController {
             comboBox.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(comboBox)
             comboBox.borderStyle = .roundedRect
+            comboBox.layer.borderWidth = 1.0
+            comboBox.layer.borderColor = UIColor.gray.cgColor
+            comboBox.layer.cornerRadius = 8.0
+            
             comboBox.register(cellClass: CountryCell.self)
             comboBox.comboBoxDataSource = self
             comboBox.comboBoxDelegate = self
@@ -45,18 +49,21 @@ class ViewController: UIViewController {
         
         bottomLayoutConstraint = bottomComboBox.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -minBottomOffset)
         
-        let goToObjcExampleButton = UIButton()
-        goToObjcExampleButton.setTitle("Objc + StoryBoard", for: .normal)
-        goToObjcExampleButton.setTitleColor(.blue, for: .normal)
+        let goToObjcExampleButton = UIButton(type: .system)
+        goToObjcExampleButton.setTitle("Go To Objc + StoryBoard example", for: .normal)
         goToObjcExampleButton.addTarget(self, action: #selector(goToObjcExample), for: .touchUpInside)
         goToObjcExampleButton.translatesAutoresizingMaskIntoConstraints = false
+        goToObjcExampleButton.layer.borderWidth = 2.0
+        goToObjcExampleButton.layer.borderColor = UIColor.systemBlue.cgColor
+        goToObjcExampleButton.layer.cornerRadius = 8.0 
+        goToObjcExampleButton.clipsToBounds = true
         view.addSubview(goToObjcExampleButton)
         
         NSLayoutConstraint.activate([
             
             goToObjcExampleButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            goToObjcExampleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            goToObjcExampleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            goToObjcExampleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            goToObjcExampleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             goToObjcExampleButton.heightAnchor.constraint(equalToConstant: 30),
             
             topComboBox.topAnchor.constraint(equalTo: goToObjcExampleButton.bottomAnchor, constant: 20),
