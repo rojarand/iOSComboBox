@@ -16,10 +16,9 @@ open class iOSDropDown: NSObject {
     
     weak var delegate: iOSDropDownDelegate?
     private static let dropDownWillShowNotification = Notification.Name("DropDownWillShow")
-    private var propertyObservations = [NSKeyValueObservation]()
+    private let onScollRepositioner = OnScrollRepositioner()
     private var showDropDownAnimator: UIViewPropertyAnimator?
     private var showDropDownDelayTimer: Timer?
-    private var showLaterWorkItem: DispatchWorkItem?
     private var isKeyboardVisible = false
     private var keyboardFrame = CGRect.zero
     internal weak var anchorView: UITextField?
@@ -117,7 +116,7 @@ open class iOSDropDown: NSObject {
     }
     
     private func setUp(_ anchorView: UITextField, _ window: UIWindow) {
-        hideOnScrollOfViewIfNeeded(anchorView)
+        onScollRepositioner.setUp(dropDown: self)
         anchorView.superview?.bringSubviewToFront(anchorView)
         if dismissingView.superview == nil {
             window.addSubview(dismissingView)
@@ -143,10 +142,10 @@ open class iOSDropDown: NSObject {
         _tableView?.removeFromSuperview()
         _tableView = nil
         dismissingView.removeFromSuperview()
-        propertyObservations.removeAll()
+        onScollRepositioner.tearDown()
     }
     
-    private var isHidden: Bool {
+    internal var isHidden: Bool {
         _tableView == nil
     }
     
@@ -196,25 +195,6 @@ open class iOSDropDown: NSObject {
         }
     }
     
-    private func hideOnScrollOfViewIfNeeded(_ view: UIView?) {
-        if propertyObservations.isEmpty {
-            hideOnScroll(of: view)
-        }
-    }
-    
-    private func hideOnScroll(of view: UIView?) {
-        guard let currentView = view else { return }
-        if let scrollView = currentView as? UIScrollView {
-            let observation = scrollView.observe(\.contentOffset, options: [.old, .new]) { [weak self] object, change in
-                if change.newValue != change.oldValue {
-                    self?.hideIfNeededAndShowLater()
-                }
-            }
-            self.propertyObservations.append(observation)
-        }
-        hideOnScroll(of: currentView.superview)
-    }
-    
     private func notifyDropDownWillShow() {
         NotificationCenter.default.post(name: iOSDropDown.dropDownWillShowNotification, object: self)
     }
@@ -250,21 +230,6 @@ open class iOSDropDown: NSObject {
         } else {
             return window.bounds.maxY - verticalMargin
         }
-    }
-    
-    private func hideIfNeededAndShowLater() {
-        if !isHidden {
-            hide()
-        } else {
-            guard let showLaterWorkItem = self.showLaterWorkItem else { return }
-            showLaterWorkItem.cancel()
-        }
-        let dispatchWorkItem = DispatchWorkItem { [weak self] in
-            self?.show()
-            self?.showLaterWorkItem = nil
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: dispatchWorkItem)
-        self.showLaterWorkItem = dispatchWorkItem
     }
 }
 
