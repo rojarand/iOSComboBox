@@ -44,13 +44,13 @@ final class iOSComboBoxUITests: XCTestCase {
     func test_the_comboBox_has_text_equal_to_selected_in_the_dropDown() throws {
         let app = XCUIApplication()
         app.launch()
-        app.staticTexts["Enter text here"].tap()
+        app.searchFields["TableComboBox"].tap()
         
         let comboItem4 = app.staticTexts.matching(identifier: "Item 4").firstMatch
         XCTAssertTrue(comboItem4.waitForExistence(timeout: 5.0))
         comboItem4.tap()
         
-        let textField = app.textFields["Enter text here"]
+        let textField = app.searchFields["TableComboBox"]
         XCTAssertEqual(textField.value as? String, "Item 4")
     }
     
@@ -63,7 +63,7 @@ final class iOSComboBoxUITests: XCTestCase {
         XCTAssert(scrollUpButton.exists)
         scrollUpButton.tap()
         
-        app.staticTexts["Enter text here"].tap()
+        app.searchFields["TableComboBox"].tap()
         
         let comboItem4 = app.staticTexts.matching(identifier: "Item 4").firstMatch
         XCTAssert(comboItem4.waitFor(format: "exists == true"))
@@ -72,7 +72,7 @@ final class iOSComboBoxUITests: XCTestCase {
     func test_dropDown_items_are_visible_when_comboBox_at_the_top_of_the_screen_is_tapped() throws {
         let app = XCUIApplication()
         app.launch()
-        app.textFields["TopComboBox"].tap()
+        app.searchFields["TopComboBox"].tap()
 
         let topDropDownItem = app.staticTexts.matching(identifier: "Poland").firstMatch
         XCTAssertTrue(topDropDownItem.waitForExistence(timeout: 5.0))
@@ -90,7 +90,7 @@ final class iOSComboBoxUITests: XCTestCase {
     func test_dropDown_items_are_visible_when_comboBox_at_the_bottom_of_the_screen_is_tapped() throws {
         let app = XCUIApplication()
         app.launch()
-        app.textFields["BottomComboBox"].tap()
+        app.searchFields["BottomComboBox"].tap()
         
         let topDropDownItem = app.staticTexts.matching(identifier: "Poland").firstMatch
         XCTAssertTrue(topDropDownItem.waitForExistence(timeout: 5.0))

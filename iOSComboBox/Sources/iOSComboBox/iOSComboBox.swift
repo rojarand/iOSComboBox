@@ -34,7 +34,7 @@ open class iOSComboBox: UITextField {
         proxyDelegate = ComboBoxDelegateProxy(comboBox: self)
         super.delegate = proxyDelegate
         dropDown.delegate = self
-        isAccessibilityElement = false
+        accessibilityTraits = [.searchField]
     }
     
     //convenience method for swift

@@ -117,6 +117,7 @@ extension ViewController: iOSComboBoxDataSource, iOSComboBoxDelegate {
         let cell: CountryCell = cellProvider.dequeCell(atRow: index)
         let (flag, countrName) = CountryData[index]
         cell.configure(with: flag, countryName: countrName)
+        cell.accessibilityTraits = [.button]
         return cell
     }
     

@@ -16,6 +16,7 @@ extension iOSDropDown: UITableViewDataSource {
             let objectValue: Any = delegate?.dropDown(self, objectValueForItemAt: indexPath.row) ?? "\(indexPath.row)"
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             cell.textLabel?.text = "\(objectValue)"
+            cell.accessibilityTraits = [.button]
             return cell
         }
     }

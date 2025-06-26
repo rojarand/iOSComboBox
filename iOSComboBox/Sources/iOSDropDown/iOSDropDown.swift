@@ -16,7 +16,7 @@ open class iOSDropDown: NSObject {
     
     weak var delegate: iOSDropDownDelegate?
     private static let dropDownWillShowNotification = Notification.Name("DropDownWillShow")
-    private let onScollRepositioner = OnScrollRepositioner()
+    private let onScrollRepositioner = OnScrollRepositioner()
     private var showDropDownAnimator: UIViewPropertyAnimator?
     private var showDropDownDelayTimer: Timer?
     private var isKeyboardVisible = false
@@ -24,9 +24,13 @@ open class iOSDropDown: NSObject {
     internal weak var anchorView: UITextField?
     private lazy var dismissingView: UIView = {
         let view = HitTestingView(tableViewContainer, anchorView) { [weak self] _, _ in
-            self?.hide()
-            self?.anchorView?.resignFirstResponder()
-            return self?.anchorView?.window
+            if !UIAccessibility.isVoiceOverRunning {
+                self?.hide()
+                self?.anchorView?.resignFirstResponder()
+                return self?.anchorView?.window
+            } else {
+                return nil
+            }
         }
         return view
     }()
@@ -116,7 +120,7 @@ open class iOSDropDown: NSObject {
     }
     
     private func setUp(_ anchorView: UITextField, _ window: UIWindow) {
-        onScollRepositioner.setUp(dropDown: self)
+        onScrollRepositioner.setUp(dropDown: self)
         anchorView.superview?.bringSubviewToFront(anchorView)
         if dismissingView.superview == nil {
             window.addSubview(dismissingView)
@@ -142,7 +146,7 @@ open class iOSDropDown: NSObject {
         _tableView?.removeFromSuperview()
         _tableView = nil
         dismissingView.removeFromSuperview()
-        onScollRepositioner.tearDown()
+        onScrollRepositioner.tearDown()
     }
     
     internal var isHidden: Bool {
