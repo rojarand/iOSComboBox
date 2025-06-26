@@ -103,12 +103,12 @@ let CountryData: [(flag: UIImage?, countryName: String)] =
  (UIImage(named: "flag-de"), "Germany"),
  (UIImage(named: "flag-ru"), "Russia"),
  (UIImage(named: "flag-it"), "Italy"),
+ (UIImage(named: "flag-cn"), "China"),
  (UIImage(named: "flag-fr"), "France"),
  (UIImage(named: "flag-gr"), "Greece"),
  (UIImage(named: "flag-pt"), "Portugal"),
  (UIImage(named: "flag-cz"), "Czechia"),
  (UIImage(named: "flag-sa"), "Republic of South Africa"),
- (UIImage(named: "flag-cn"), "China"),
 ]
 
 extension ViewController: iOSComboBoxDataSource, iOSComboBoxDelegate {

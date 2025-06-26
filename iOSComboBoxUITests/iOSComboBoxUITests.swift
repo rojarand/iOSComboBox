@@ -15,6 +15,14 @@ extension XCUIElement {
         let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: predicateFormat), object: self)
         return XCTWaiter().wait(for: [expectation], timeout: timeout) == .completed
     }
+    
+    
+}
+
+extension XCUIApplication {
+    func findTableContaining(text: String) -> XCUIElement? {
+        tables.allElementsBoundByIndex.first { table in !table.tables.firstMatch.exists && table.staticTexts[text].exists }
+    }
 }
 
 final class iOSComboBoxUITests: XCTestCase {
@@ -32,7 +40,6 @@ final class iOSComboBoxUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    /*
     //po print(app.debugDescription)!!!!!!!!
     func test_the_comboBox_has_text_equal_to_selected_in_the_dropDown() throws {
         let app = XCUIApplication()
@@ -71,6 +78,10 @@ final class iOSComboBoxUITests: XCTestCase {
         XCTAssertTrue(topDropDownItem.waitForExistence(timeout: 5.0))
         XCTAssertTrue(topDropDownItem.isHittable)
         
+        print(app.debugDescription)
+        
+        app.findTableContaining(text: "Poland")!.swipeUp() //Ensure the bottom part of the drop down is visible
+        
         let bottomDropDownItem = app.staticTexts.matching(identifier: "China").firstMatch
         XCTAssertTrue(bottomDropDownItem.waitForExistence(timeout: 5.0))
         XCTAssertTrue(bottomDropDownItem.isHittable)
@@ -85,10 +96,12 @@ final class iOSComboBoxUITests: XCTestCase {
         XCTAssertTrue(topDropDownItem.waitForExistence(timeout: 5.0))
         XCTAssertTrue(topDropDownItem.isHittable)
         
+        app.findTableContaining(text: "Poland")!.swipeUp() //Ensure the bottom part of the drop down is visible
+
         let bottomDropDownItem = app.staticTexts.matching(identifier: "China").firstMatch
         XCTAssertTrue(bottomDropDownItem.waitForExistence(timeout: 5.0))
         XCTAssertTrue(bottomDropDownItem.isHittable)
-    }*/
+    }
 
     /*
     func testLaunchPerformance() throws {
