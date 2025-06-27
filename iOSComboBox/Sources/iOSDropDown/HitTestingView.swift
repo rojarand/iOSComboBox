@@ -18,8 +18,10 @@ final class HitTestingView: UIView {
         self.dropDownContainer = dropDownContainer
         self.anchorView = anchorView
         self.hitTestCallback = hitTestCallback
+        
         super.init(frame: .zero)
-        autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.isAccessibilityElement = false
+        self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     required init?(coder: NSCoder) {

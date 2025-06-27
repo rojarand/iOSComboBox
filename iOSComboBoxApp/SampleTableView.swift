@@ -149,6 +149,7 @@ class ComboBoxCell: UITableViewCell, iOSComboBoxDataSource, iOSComboBoxDelegate 
         comboBox.layer.borderColor = UIColor.gray.cgColor
         comboBox.layer.cornerRadius = 8.0
         comboBox.placeholder = "Enter text here"
+        comboBox.accessibilityIdentifier = "TableComboBox"
         contentView.addSubview(comboBox)
         
         // Add layout constraints
