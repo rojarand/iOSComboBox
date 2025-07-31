@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		276725A32CCCDE0000024155 /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 276725A22CCCDE0000024155 /* ContactTableViewCell.m */; };
 		27AD4EAF2CBA80A300DA1C6F /* SampleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */; };
+		27C333342E3BC8A300E5F5F6 /* ViewControllerWithSwitftUiContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C333332E3BC8A300E5F5F6 /* ViewControllerWithSwitftUiContent.swift */; };
 		27C781A92C5214F50077E10C /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C781A82C5214F50077E10C /* CustomTableViewCell.swift */; };
 		27EEB7542CCBF291006E483B /* ObjcViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EEB7522CCBF291006E483B /* ObjcViewController.m */; };
 		27EEB7552CCBF291006E483B /* ObjcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27EEB7532CCBF291006E483B /* ObjcViewController.xib */; };
@@ -50,6 +51,7 @@
 		276725A12CCCDE0000024155 /* ContactTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
 		276725A22CCCDE0000024155 /* ContactTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
 		27AD4EAE2CBA80A300DA1C6F /* SampleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTableView.swift; sourceTree = "<group>"; };
+		27C333332E3BC8A300E5F5F6 /* ViewControllerWithSwitftUiContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithSwitftUiContent.swift; sourceTree = "<group>"; };
 		27C781A82C5214F50077E10C /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		27EEB7502CCBF290006E483B /* iOSComboBoxApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSComboBoxApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		27EEB7512CCBF291006E483B /* ObjcViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcViewController.h; sourceTree = "<group>"; };
@@ -141,6 +143,14 @@
 			path = objc;
 			sourceTree = "<group>";
 		};
+		27C333322E3BC82E00E5F5F6 /* swiftUi */ = {
+			isa = PBXGroup;
+			children = (
+				27C333332E3BC8A300E5F5F6 /* ViewControllerWithSwitftUiContent.swift */,
+			);
+			path = swiftUi;
+			sourceTree = "<group>";
+		};
 		4597D3240CF9577D829C7FE0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +186,7 @@
 		816C73722BA4A7D700FD9E28 /* iOSComboBoxApp */ = {
 			isa = PBXGroup;
 			children = (
+				27C333322E3BC82E00E5F5F6 /* swiftUi */,
 				276725A02CCCDDD600024155 /* objc */,
 				816C73732BA4A7D700FD9E28 /* AppDelegate.swift */,
 				816C73752BA4A7D700FD9E28 /* SceneDelegate.swift */,
@@ -468,6 +479,7 @@
 				27C781A92C5214F50077E10C /* CustomTableViewCell.swift in Sources */,
 				27AD4EAF2CBA80A300DA1C6F /* SampleTableView.swift in Sources */,
 				816C73762BA4A7D700FD9E28 /* SceneDelegate.swift in Sources */,
+				27C333342E3BC8A300E5F5F6 /* ViewControllerWithSwitftUiContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

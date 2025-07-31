@@ -7,7 +7,8 @@
 - Customizable appearance
 - Smooth animations for the dropdown
 - Easy integration with both Storyboard and programmatically
-- Swift and Objective-C compatibility
+- SwiftUI and Objective-C compatibility
+- Supports iOS Accessibility
 
 ## Requirements
 
