@@ -59,6 +59,16 @@ class ViewController: UIViewController {
         goToObjcExampleButton.clipsToBounds = true
         view.addSubview(goToObjcExampleButton)
         
+        let openSwiftUiExampleButton = UIButton(type: .system)
+        openSwiftUiExampleButton.setTitle("Open SwiftUi example", for: .normal)
+        openSwiftUiExampleButton.addTarget(self, action: #selector(openSwiftUiExample), for: .touchUpInside)
+        openSwiftUiExampleButton.translatesAutoresizingMaskIntoConstraints = false
+        openSwiftUiExampleButton.layer.borderWidth = 2.0
+        openSwiftUiExampleButton.layer.borderColor = UIColor.systemBlue.cgColor
+        openSwiftUiExampleButton.layer.cornerRadius = 8.0
+        openSwiftUiExampleButton.clipsToBounds = true
+        view.addSubview(openSwiftUiExampleButton)
+        
         NSLayoutConstraint.activate([
             
             goToObjcExampleButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -66,7 +76,12 @@ class ViewController: UIViewController {
             goToObjcExampleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             goToObjcExampleButton.heightAnchor.constraint(equalToConstant: 30),
             
-            topComboBox.topAnchor.constraint(equalTo: goToObjcExampleButton.bottomAnchor, constant: 20),
+            openSwiftUiExampleButton.topAnchor.constraint(equalTo: goToObjcExampleButton.bottomAnchor, constant: 20),
+            openSwiftUiExampleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            openSwiftUiExampleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            openSwiftUiExampleButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            topComboBox.topAnchor.constraint(equalTo: openSwiftUiExampleButton.bottomAnchor, constant: 20),
             topComboBox.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             topComboBox.widthAnchor.constraint(equalToConstant: 200),
             
@@ -86,6 +101,11 @@ class ViewController: UIViewController {
     @objc private func goToObjcExample() {
         let objcExampleVC = ObjcViewController()
         self.navigationController?.pushViewController(objcExampleVC, animated: false)
+    }
+    
+    @objc private func openSwiftUiExample() {
+        let swiftUiExample = ViewControllerWithSwitftUiContent()
+        self.navigationController?.present(swiftUiExample, animated: true)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

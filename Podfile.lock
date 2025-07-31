@@ -1,5 +1,5 @@
 PODS:
-  - iOSComboBox (0.1.0)
+  - iOSComboBox (0.0.4)
 
 DEPENDENCIES:
   - iOSComboBox (from `.`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "."
 
 SPEC CHECKSUMS:
-  iOSComboBox: ea84f11effc172b2323397f699ecbb5ce5cbef1f
+  iOSComboBox: fd2c1744862cd1fa7be23d3a41c49cab0cefcea1
 
 PODFILE CHECKSUM: 0fd11f6dcfb2c750150e48ee4adba7504c21a53a
 
