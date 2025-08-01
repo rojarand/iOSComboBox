@@ -16,11 +16,10 @@ open class iOSDropDown: NSObject {
     
     weak var delegate: iOSDropDownDelegate?
     private static let dropDownWillShowNotification = Notification.Name("DropDownWillShow")
-    private let onScrollRepositioner = OnScrollRepositioner()
-    private var showDropDownAnimator: UIViewPropertyAnimator?
-    private var showDropDownDelayTimer: Timer?
+    private let dropDownPresenter = iOSDropDownPresenter()
     private var isKeyboardVisible = false
     private var keyboardFrame = CGRect.zero
+    internal let dropDownAnimator = iOSDropDownAnimator()
     internal weak var anchorView: UITextField?
     private lazy var dismissingView: UIView = {
         let view = HitTestingView(tableViewContainer, anchorView) { [weak self] _, _ in
@@ -85,7 +84,7 @@ open class iOSDropDown: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func show() {
+    public func show() {
         showDropDown(animate: _tableView == nil, delay: isKeyboardVisible ? 0.0 : 0.5)
     }
     
@@ -111,16 +110,17 @@ open class iOSDropDown: NSObject {
         _tableView?.register(cellMetadata.cellClass.self, forCellReuseIdentifier: cellMetadata.identifier)
     }
     
-    private func showDropDown(animate: Bool, delay: TimeInterval, requiresFirstResponder: Bool = false) {
-        guard let anchorView = self.anchorView, let window = anchorView.window,
-                ((requiresFirstResponder && anchorView.isFirstResponder) || !requiresFirstResponder) else { return }
+    func showDropDown(animate: Bool, delay: TimeInterval, requiresFirstResponder: Bool = false) {
+        guard let anchorView = self.anchorView,
+              let window = anchorView.window,
+              ((requiresFirstResponder && anchorView.isFirstResponder) || !requiresFirstResponder) else { return }
         notifyDropDownWillShow()
         setUp(anchorView, window)
         layout(anchorView: anchorView, window: window, animate: animate, delay: delay)
     }
     
     private func setUp(_ anchorView: UITextField, _ window: UIWindow) {
-        onScrollRepositioner.setUp(dropDown: self)
+        dropDownPresenter.setUp(dropDown: self)
         anchorView.superview?.bringSubviewToFront(anchorView)
         if dismissingView.superview == nil {
             window.addSubview(dismissingView)
@@ -138,25 +138,16 @@ open class iOSDropDown: NSObject {
     }
     
     private func tearDown() {
-        showDropDownDelayTimer?.invalidate()
-        showDropDownDelayTimer = nil
-        showDropDownAnimator?.stopAnimation(true)
-        showDropDownAnimator = nil
         dropDownFrame = .zero
         _tableView?.removeFromSuperview()
         _tableView = nil
         dismissingView.removeFromSuperview()
-        onScrollRepositioner.tearDown()
+        dropDownPresenter.tearDown()
+        dropDownAnimator.cancel()
     }
     
     internal var isHidden: Bool {
         _tableView == nil
-    }
-    
-    private func repositionDropDownIfNeeded() {
-        if !isHidden {
-            showDropDown(animate: false, delay: 0.0, requiresFirstResponder: true)
-        }
     }
     
     private func layout(anchorView: UITextField, window: UIWindow, animate: Bool, delay: TimeInterval) {
@@ -164,10 +155,9 @@ open class iOSDropDown: NSObject {
         prepareTableView(offscreenHeight: dropDownLayout.offscreenHeight)
         layoutDropDown(using: dropDownLayout)
         
-        
         func calculateDropDownLayout() -> DropDownLayout {
             tableView.reloadData()
-            return DropDownLayoutCalculator.calculateDropDownLayout(
+            return iOSDropDownLayoutCalculator.calculateDropDownLayout(
                 desirableContainerHeight: tableView.calculateTableViewHeight(),
                 anchorViewFrame: anchorView.convert(anchorView.bounds, to: window),
                 minYOfDropDown: calculateMinYOfDropDown(),
@@ -179,21 +169,17 @@ open class iOSDropDown: NSObject {
         }
     
         func layoutDropDown(using layout: DropDownLayout) {
-            
-            showDropDownAnimator?.stopAnimation(true)
-            showDropDownAnimator = nil
+            dropDownAnimator.cancel()
             if animate {
                 if dropDownFrame == .zero {
                     dropDownFrame = layout.initialFrame
                 }
-                showDropDownAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) { [weak self] in
+                dropDownAnimator.animate(afterDelay: delay) { [weak self] in
                     self?.dropDownFrame = layout.finalFrame
                 }
-                showDropDownAnimator?.startAnimation(afterDelay: delay)
             } else {
                 dropDownFrame = layout.finalFrame
             }
-            
             dismissingView.frame = window.bounds
             window.bringSubviewToFront(dismissingView)
         }
@@ -230,9 +216,9 @@ open class iOSDropDown: NSObject {
     
     private func calculateMaxYOfDropDown(_ window: UIWindow) -> CGFloat {
         if isKeyboardVisible {
-            return keyboardFrame.minY - verticalMargin
+            keyboardFrame.minY - verticalMargin
         } else {
-            return window.bounds.maxY - verticalMargin
+            window.bounds.maxY - verticalMargin
         }
     }
 }
@@ -305,12 +291,8 @@ extension iOSDropDown {
     @objc private func keyboardWillShow(_ notification: Notification) {
         isKeyboardVisible = true
         keyboardFrame = keyboardFrame(fromNotification: notification) ?? .zero
-        let showDropDownDelay = (keyboardAnimationDuration(fromNotification: notification) ?? Self.defaultKeyboardAnimationDuration) + 0.05
-        showDropDownAnimator?.stopAnimation(true)
-        showDropDownDelayTimer?.invalidate()
-        showDropDownDelayTimer = Timer.scheduledTimer(withTimeInterval: showDropDownDelay, repeats: false) { [weak self] _ in
-            self?.showDropDown(animate: true, delay: 0.0, requiresFirstResponder: true)
-        }
+        let keyboardAnimationDuration = (keyboardAnimationDuration(fromNotification: notification) ?? Self.defaultKeyboardAnimationDuration) + 0.05
+        dropDownPresenter.showDropDownWhenKeyboardIsDisplayed(keyboardAnimationDuration: keyboardAnimationDuration)
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
@@ -321,7 +303,7 @@ extension iOSDropDown {
     @objc private func keyboardDidHide(_ notification: Notification) {
         isKeyboardVisible = false
         keyboardFrame = keyboardFrame(fromNotification: notification) ?? .zero
-        repositionDropDownIfNeeded()
+        dropDownPresenter.repositionDropDownOnKeyboardDidHide()
     }
     
     private static var defaultKeyboardAnimationDuration: TimeInterval {
