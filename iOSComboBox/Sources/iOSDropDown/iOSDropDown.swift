@@ -17,8 +17,7 @@ open class iOSDropDown: NSObject {
     weak var delegate: iOSDropDownDelegate?
     private static let dropDownWillShowNotification = Notification.Name("DropDownWillShow")
     private let dropDownPresenter = iOSDropDownPresenter()
-    private var isKeyboardVisible = false
-    private var keyboardFrame = CGRect.zero
+    private let keyboardSupport: iOSDropDownKeyboardSupport
     internal let dropDownAnimator = iOSDropDownAnimator()
     internal weak var anchorView: UITextField?
     private lazy var dismissingView: UIView = {
@@ -73,10 +72,8 @@ open class iOSDropDown: NSObject {
     
     init(anchorView: UITextField) {
         self.anchorView = anchorView
+        keyboardSupport = iOSDropDownKeyboardSupport(dropDownPresenter: dropDownPresenter)
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleDropDownWillShow(_:)), name: iOSDropDown.dropDownWillShowNotification, object: nil)
     }
     
@@ -85,7 +82,7 @@ open class iOSDropDown: NSObject {
     }
     
     public func show() {
-        showDropDown(animate: _tableView == nil, delay: isKeyboardVisible ? 0.0 : 0.5)
+        showDropDown(animate: _tableView == nil, delay: keyboardSupport.isKeyboardVisible == true ? 0.0 : 0.5)
     }
     
     public func hide() {
@@ -215,7 +212,7 @@ open class iOSDropDown: NSObject {
     }
     
     private func calculateMaxYOfDropDown(_ window: UIWindow) -> CGFloat {
-        if isKeyboardVisible {
+        if keyboardSupport.isKeyboardVisible == true, let keyboardFrame = keyboardSupport.keyboardFrame {
             keyboardFrame.minY - verticalMargin
         } else {
             window.bounds.maxY - verticalMargin
@@ -283,39 +280,3 @@ extension iOSDropDown {
     }
     
 }
-
-// MARK: - Keyboard handling
-
-extension iOSDropDown {
-    
-    @objc private func keyboardWillShow(_ notification: Notification) {
-        isKeyboardVisible = true
-        keyboardFrame = keyboardFrame(fromNotification: notification) ?? .zero
-        let keyboardAnimationDuration = (keyboardAnimationDuration(fromNotification: notification) ?? Self.defaultKeyboardAnimationDuration) + 0.05
-        dropDownPresenter.showDropDownWhenKeyboardIsDisplayed(keyboardAnimationDuration: keyboardAnimationDuration)
-    }
-    
-    @objc private func keyboardWillHide(_ notification: Notification) {
-        isKeyboardVisible = false
-        keyboardFrame = keyboardFrame(fromNotification: notification) ?? .zero
-    }
-    
-    @objc private func keyboardDidHide(_ notification: Notification) {
-        isKeyboardVisible = false
-        keyboardFrame = keyboardFrame(fromNotification: notification) ?? .zero
-        dropDownPresenter.repositionDropDownOnKeyboardDidHide()
-    }
-    
-    private static var defaultKeyboardAnimationDuration: TimeInterval {
-        0.25
-    }
-    
-    private func keyboardFrame(fromNotification notification: Notification) -> CGRect? {
-        (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-    }
-    
-    private func keyboardAnimationDuration(fromNotification notification: Notification) -> TimeInterval? {
-        (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
-    }
-}
-
