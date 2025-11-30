@@ -14,11 +14,19 @@ jobs:
 
     - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
+    - name: Install SwiftLint (Homebrew)
+      run: |
+        brew update
+        brew install swiftlint
+
+    - name: Run SwiftLint
+      run: swiftlint
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.1.7
-
+  
     - name: Install dependencies
       run: |
         gem install bundler

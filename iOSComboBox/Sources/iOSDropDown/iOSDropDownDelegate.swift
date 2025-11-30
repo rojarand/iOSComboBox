@@ -1,5 +1,5 @@
 //
-//  UIDropDownDelegate.swift
+//  iOSDropDownDelegate.swift
 //  Pods
 //
 //  Created by Robert Andrzejczyk on 10/08/2024.
@@ -9,20 +9,22 @@ import UIKit
 
 public class UITableViewCellProvider: NSObject {
     private let tableView: UITableView
-    
+
     init(tableView: UITableView) {
         self.tableView = tableView
     }
-    
+
     public func dequeCell<T: UITableViewCell>(atRow row: Int) -> T {
+        // swiftlint:disable:next force_cast
         tableView.dequeueReusableCell(withIdentifier: String(describing: T.self), for: IndexPath(row: row, section: 0)) as! T
     }
-    
+
     @objc public func dequeCell(atRow row: Int, withIdentifier identifier: String) -> UITableViewCell {
         tableView.dequeueReusableCell(withIdentifier: identifier, for: IndexPath(row: row, section: 0))
     }
 }
 
+// swiftlint:disable:next type_name
 @objc public protocol iOSDropDownDelegate: NSObjectProtocol {
     @objc @MainActor func numberOfRows(in dropDown: iOSDropDown) -> Int
     @objc @MainActor func dropDown(_ dropDown: iOSDropDown, objectValueForItemAt index: Int) -> Any?
@@ -36,33 +38,33 @@ public class UITableViewCellProvider: NSObject {
 extension UITableView {
     func calculateTableViewHeight() -> CGFloat {
         var totalHeight: CGFloat = 0.0
-        
+
         // Loop through all sections
-        for section in 0..<self.numberOfSections {
+        for section in 0 ..< numberOfSections {
             // Add the height of the section header, if any
-            if let headerHeight = self.delegate?.tableView?(self, heightForHeaderInSection: section) {
+            if let headerHeight = delegate?.tableView?(self, heightForHeaderInSection: section) {
                 totalHeight += headerHeight
             } else {
-                totalHeight += self.sectionHeaderHeight
+                totalHeight += sectionHeaderHeight
             }
-            
+
             // Loop through all rows in the section
-            for row in 0..<self.numberOfRows(inSection: section) {
-                if let rowHeight = self.delegate?.tableView?(self, heightForRowAt: IndexPath(row: row, section: section)) {
+            for row in 0 ..< numberOfRows(inSection: section) {
+                if let rowHeight = delegate?.tableView?(self, heightForRowAt: IndexPath(row: row, section: section)) {
                     totalHeight += rowHeight
                 } else {
-                    totalHeight += self.rowHeight
+                    totalHeight += rowHeight
                 }
             }
-            
+
             // Add the height of the section footer, if any
-            if let footerHeight = self.delegate?.tableView?(self, heightForFooterInSection: section) {
+            if let footerHeight = delegate?.tableView?(self, heightForFooterInSection: section) {
                 totalHeight += footerHeight
             } else {
-                totalHeight += self.sectionFooterHeight
+                totalHeight += sectionFooterHeight
             }
         }
-        
+
         return totalHeight
     }
 }

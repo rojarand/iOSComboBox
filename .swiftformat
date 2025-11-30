@@ -1,0 +1,5 @@
+--maxwidth 150
+--allman false
+--indent 4
+--wraparguments before-first
+--wrapcollections before-first

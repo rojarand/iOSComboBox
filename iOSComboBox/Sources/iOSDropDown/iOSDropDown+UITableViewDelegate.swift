@@ -8,20 +8,20 @@
 import UIKit
 
 // MARK: - UITableViewDelegate
-internal let DefaultDropDownCellHeight = 40.0
+
+let defaultDropDownCellHeight = 40.0
 
 extension iOSDropDown: UITableViewDelegate {
-    
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if delegate?.responds(to: #selector(iOSDropDownDelegate.dropDown(_:heightForRowAt:))) == true {
             return (delegate?.dropDown?(self, heightForRowAt: indexPath.row))!
         } else {
-            return DefaultDropDownCellHeight
+            return defaultDropDownCellHeight
         }
     }
-    
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.dropDown(self, didSelectRowAt: indexPath)//TODO
+
+    public func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.dropDown(self, didSelectRowAt: indexPath)
         anchorView?.resignFirstResponder()
         hide()
     }

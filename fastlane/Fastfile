@@ -43,7 +43,7 @@ platform :ios do
       workspace: "iOSComboBox.xcworkspace", 
       scheme: scheme,
       clean: true,
-      devices: ["iPhone 15"],
+      devices: ["iPhone 16 Pro (18.4)"],
       skip_build: false,
       output_directory: "./fastlane/test_output", # Directory for test reports
       result_bundle: true,

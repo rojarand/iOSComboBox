@@ -112,6 +112,53 @@ To explore a full example, check out the iOSComboBoxApp folder in this repositor
 
 <img src="readme-resources/objc-storybaord-example.gif" style="width: 300px; height: auto;">
 
+## Contribution
+
+### Project setup
+
+Install swiftlint and swiftformat.
+```bash
+$ brew install swiftlint
+$ brew install swiftformat
+```
+
+Setup the pre-commit hook
+```bash
+#!/bin/bash
+#
+# .git/hooks/pre-commit
+#
+# Automatically run SwiftFormat on all Swift files, then re-add them to the index.
+# 1) Find all staged Swift files (added/modified) and run swiftformat on each.
+# If you prefer to format the entire directory every time, replace this block with `swiftformat .`.
+STAGED_SWIFT_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.swift$')
+if [ -n "$STAGED_SWIFT_FILES" ]; then
+  echo "Running SwiftFormat on staged Swift files..."
+  echo "$STAGED_SWIFT_FILES" | xargs swiftformat
+  # 2) Re-stage any changes swiftformat made
+  echo "$STAGED_SWIFT_FILES" | xargs git add
+fi
+
+exit 0
+```
+
+... and allow execution
+```bash
+chmod +x .git/hooks/pre-commit
+```
+
+Install pods
+
+```bash
+$ pod install
+```
+
+Open the generated workspace file
+
+```
+$ open iOSComboBox.xcworkspace
+```
+
 ## License
 iOSComboBox is released under the MIT license. See [LICENSE](https://en.wikipedia.org/wiki/MIT_License) for details.
 

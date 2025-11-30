@@ -5,11 +5,10 @@
 //  Created by Robert Andrzejczyk on 15/03/2024.
 //
 
-import XCTest
 @testable import iOSComboBox
+import XCTest
 
 final class iOSComboBoxTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -28,9 +27,8 @@ final class iOSComboBoxTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

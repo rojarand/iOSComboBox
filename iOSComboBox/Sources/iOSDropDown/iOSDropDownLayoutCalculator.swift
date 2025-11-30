@@ -1,5 +1,5 @@
 //
-//  DropDownLayoutCalculator.swift
+//  iOSDropDownLayoutCalculator.swift
 //  Pods
 //
 //  Created by Robert Andrzejczyk on 31/08/2024.
@@ -21,28 +21,35 @@ extension DropDownLayout {
     var withFoldedDownInitialFrame: DropDownLayout {
         with(initialFrame: finalFrame.foldedDown)
     }
-    
+
     private func with(initialFrame: CGRect) -> DropDownLayout {
-        DropDownLayout(initialFrame: initialFrame,
-                       finalFrame: finalFrame,
-                       offscreenHeight: offscreenHeight)
+        DropDownLayout(
+            initialFrame: initialFrame,
+            finalFrame: finalFrame,
+            offscreenHeight: offscreenHeight
+        )
     }
 }
 
-struct iOSDropDownLayoutCalculator {
-    
-    static func calculateDropDownLayout(desirableContainerHeight: CGFloat,
-                                        anchorViewFrame: CGRect,
-                                        minYOfDropDown: CGFloat,
-                                        maxYOfDropDown: CGFloat) -> DropDownLayout {
-        
-        let layoutAboveAnchorView = calculateTopDropDownLayout(desirableContainerHeight,
-                                                               anchorViewFrame,
-                                                               minYOfDropDown)
-        
-        let layoutBelowAnchorView = calculateBottomDropDownLayout(desirableContainerHeight,
-                                                                  anchorViewFrame,
-                                                                  maxYOfDropDown)
+// swiftlint:disable:next type_name
+enum iOSDropDownLayoutCalculator {
+    static func calculateDropDownLayout(
+        desirableContainerHeight: CGFloat,
+        anchorViewFrame: CGRect,
+        minYOfDropDown: CGFloat,
+        maxYOfDropDown: CGFloat
+    ) -> DropDownLayout {
+        let layoutAboveAnchorView = calculateTopDropDownLayout(
+            desirableContainerHeight,
+            anchorViewFrame,
+            minYOfDropDown
+        )
+
+        let layoutBelowAnchorView = calculateBottomDropDownLayout(
+            desirableContainerHeight,
+            anchorViewFrame,
+            maxYOfDropDown
+        )
         let shouldPlaceBelowAnchorView = layoutBelowAnchorView.offscreenHeight <= layoutAboveAnchorView.offscreenHeight
         return if shouldPlaceBelowAnchorView {
             layoutBelowAnchorView.withFoldedUpInitialFrame
@@ -50,31 +57,39 @@ struct iOSDropDownLayoutCalculator {
             layoutAboveAnchorView.withFoldedDownInitialFrame
         }
     }
-    
-    private static func calculateTopDropDownLayout(_ desirableContainerHeight: CGFloat,
-                                                   _ anchorViewFrame: CGRect,
-                                                   _ minYOfDropDown: CGFloat) -> DropDownLayout {
+
+    private static func calculateTopDropDownLayout(
+        _ desirableContainerHeight: CGFloat,
+        _ anchorViewFrame: CGRect,
+        _ minYOfDropDown: CGFloat
+    ) -> DropDownLayout {
         let dropDownDesirableMinY = anchorViewFrame.minY - desirableContainerHeight
-        let dropDownOffscreenHeight = abs(min(0, dropDownDesirableMinY-minYOfDropDown))
+        let dropDownOffscreenHeight = abs(min(0, dropDownDesirableMinY - minYOfDropDown))
         let dropDownContainerHeight = desirableContainerHeight - dropDownOffscreenHeight
-        let dropDownFrame = CGRect(x: anchorViewFrame.minX,
-                                   y: anchorViewFrame.minY - dropDownContainerHeight,
-                                   width: anchorViewFrame.width,
-                                   height: dropDownContainerHeight)
+        let dropDownFrame = CGRect(
+            x: anchorViewFrame.minX,
+            y: anchorViewFrame.minY - dropDownContainerHeight,
+            width: anchorViewFrame.width,
+            height: dropDownContainerHeight
+        )
         return DropDownLayout(initialFrame: .zero, finalFrame: dropDownFrame, offscreenHeight: dropDownOffscreenHeight)
     }
-    
-    private static func calculateBottomDropDownLayout(_ desirableContainerHeight: CGFloat,
-                                                      _ anchorViewFrame: CGRect,
-                                                      _ maxYOfDropDown: CGFloat) -> DropDownLayout {
+
+    private static func calculateBottomDropDownLayout(
+        _ desirableContainerHeight: CGFloat,
+        _ anchorViewFrame: CGRect,
+        _ maxYOfDropDown: CGFloat
+    ) -> DropDownLayout {
         let dropDownDesirableMinY = anchorViewFrame.maxY
         let dropDownDesirableMaxY = dropDownDesirableMinY + desirableContainerHeight
-        let dropDownOffscreenHeight = max(0, dropDownDesirableMaxY-maxYOfDropDown)
+        let dropDownOffscreenHeight = max(0, dropDownDesirableMaxY - maxYOfDropDown)
         let dropDownContainerHeight = desirableContainerHeight - dropDownOffscreenHeight
-        let dropDownFrame = CGRect(x: anchorViewFrame.minX,
-                                   y: dropDownDesirableMinY,
-                                   width: anchorViewFrame.width,
-                                   height: dropDownContainerHeight)
+        let dropDownFrame = CGRect(
+            x: anchorViewFrame.minX,
+            y: dropDownDesirableMinY,
+            width: anchorViewFrame.width,
+            height: dropDownContainerHeight
+        )
         return DropDownLayout(initialFrame: .zero, finalFrame: dropDownFrame, offscreenHeight: dropDownOffscreenHeight)
     }
 }

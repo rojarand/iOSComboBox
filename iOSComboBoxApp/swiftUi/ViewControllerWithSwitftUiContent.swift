@@ -5,21 +5,20 @@
 //  Created by Robert Andrzejczyk on 31/07/2025.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 class CountryComboBox: iOSComboBox {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setUp()
     }
-    
+
     private func setUp() {
         comboBoxDataSource = self
         comboBoxDelegate = self
@@ -32,42 +31,38 @@ class CountryComboBox: iOSComboBox {
 }
 
 extension CountryComboBox: iOSComboBoxDataSource, iOSComboBoxDelegate {
-    
-    func comboBox(_ comboBox: iOSComboBox, cellProvider: UITableViewCellProvider, forRowAt index: Int) -> UITableViewCell {
+    func comboBox(_: iOSComboBox, cellProvider: UITableViewCellProvider, forRowAt index: Int) -> UITableViewCell {
         let cell: CountryCell = cellProvider.dequeCell(atRow: index)
-        let (flag, countrName) = CountryData[index]
+        let (flag, countrName) = countryData[index]
         cell.configure(with: flag, countryName: countrName)
         cell.accessibilityTraits = [.button]
         return cell
     }
-    
-    func numberOfItems(in comboBox: iOSComboBox) -> Int {
-        CountryData.count
+
+    func numberOfItems(in _: iOSComboBox) -> Int {
+        countryData.count
     }
-    
-    func comboBox(_ comboBox: iOSComboBox, objectValueForItemAt index: Int) -> Any? {
-        CountryData[index].countryName
+
+    func comboBox(_: iOSComboBox, objectValueForItemAt index: Int) -> Any? {
+        countryData[index].countryName
     }
-    
-    func comboBox(_ comboBox: iOSComboBox, heightForRowAt index: Int) -> CGFloat {
+
+    func comboBox(_: iOSComboBox, heightForRowAt _: Int) -> CGFloat {
         30.0
     }
 }
 
 struct CountryComboBoxWrapper: UIViewRepresentable {
-
-    func makeUIView(context: Context) -> CountryComboBox {
+    func makeUIView(context _: Context) -> CountryComboBox {
         CountryComboBox()
     }
 
-    func updateUIView(_ uiView: CountryComboBox, context: Context) {
-    }
+    func updateUIView(_: CountryComboBox, context _: Context) {}
 }
 
 struct MySwiftUIView: View {
-    
-    let closeHandler: ()->Void
-    
+    let closeHandler: () -> Void
+
     var body: some View {
         VStack(spacing: 30) {
             Text("Hello from SwiftUI!")
@@ -88,43 +83,41 @@ struct MySwiftUIView: View {
 }
 
 class ViewControllerWithSwitftUiContent: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Create the SwiftUI view
-        let swiftUIView = MySwiftUIView{ [weak self] in
+        let swiftUIView = MySwiftUIView { [weak self] in
             self?.dismiss(animated: true)
         }
-        
+
         // Wrap it in a hosting controller
         let hostingController = UIHostingController(rootView: swiftUIView)
-        
+
         // Add as a child VC
         addChild(hostingController)
         view.addSubview(hostingController.view)
-        
+
         // Set constraints or frame
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
             hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
-        
+
         // Finish adding child
         hostingController.didMove(toParent: self)
     }
-    
+
     /*
      // MARK: - Navigation
-     
+
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
      }
      */
-    
 }
