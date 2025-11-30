@@ -14,6 +14,15 @@ jobs:
 
     - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
+    - name: List Xcodes
+      run: |
+        echo "---------------"
+        xcodebuild -version
+        echo "---------------"
+        xcodebuild -showsdks
+        echo "---------------"
+        ls -d /Applications/*.app | grep -i xcode
+
     - name: Install SwiftLint (Homebrew)
       run: |
         brew update
