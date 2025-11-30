@@ -226,6 +226,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 816C739A2BA4A7D900FD9E28 /* Build configuration list for PBXNativeTarget "iOSComboBoxApp" */;
 			buildPhases = (
+				272F40322EDC4F2700A1393A /* swiftlint */,
+				272F40332EDC50D100A1393A /* swiftformat */,
 				E3F68D616B4E8E36E0C6090D /* [CP] Check Pods Manifest.lock */,
 				816C736C2BA4A7D700FD9E28 /* Sources */,
 				816C736D2BA4A7D700FD9E28 /* Frameworks */,
@@ -354,6 +356,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		272F40322EDC4F2700A1393A /* swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#if which swiftlint > /dev/null; then\n#  swiftlint --quiet\n#else\n#  echo \"warning: SwiftLint not installed. Install with 'brew install swiftlint'.\"\n#fi\n";
+		};
+		272F40332EDC50D100A1393A /* swiftformat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = swiftformat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#if which swiftformat > /dev/null; then\n#  swiftformat \"$PWD\"\n#else\n#  echo \"warning: SwiftFormat not installed. Install with 'brew install swiftformat'.\"\n#fi\n";
+		};
 		2A23DECB7A9DAB1A8F53E5BE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

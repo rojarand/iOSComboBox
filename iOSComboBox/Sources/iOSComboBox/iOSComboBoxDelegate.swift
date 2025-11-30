@@ -7,7 +7,8 @@
 
 import UIKit
 
-@objc public protocol iOSComboBoxDelegate: NSObjectProtocol/* : NSTextFieldDelegate*/ {
+// swiftlint:disable:next type_name
+@objc public protocol iOSComboBoxDelegate: NSObjectProtocol { /* : NSTextFieldDelegate*/
 //    @objc @MainActor optional func comboBoxWillPopUp(_ notification: Notification)
 //    @objc @MainActor optional func comboBoxWillDismiss(_ notification: Notification)
 //    @objc @MainActor optional func comboBoxSelectionDidChange(_ notification: Notification)
@@ -18,7 +19,7 @@ import UIKit
 }
 
 extension iOSComboBoxDelegate {
-    @MainActor func comboBox(_ comboBox: iOSComboBox, didSelectRowAt index: Int) {
+    @MainActor func comboBox(_: iOSComboBox, didSelectRowAt _: Int) {
         print("Default implementation of optionalMethod.")
     }
 }

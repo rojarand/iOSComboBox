@@ -12,14 +12,14 @@ struct CellMetadata {
     let identifier: String
 }
 
+// swiftlint:disable:next type_name
 open class iOSDropDown: NSObject {
-    
     weak var delegate: iOSDropDownDelegate?
     private static let dropDownWillShowNotification = Notification.Name("DropDownWillShow")
     private let dropDownPresenter = iOSDropDownPresenter()
     private let keyboardSupport: iOSDropDownKeyboardSupport
-    internal let dropDownAnimator = iOSDropDownAnimator()
-    internal weak var anchorView: UITextField?
+    let dropDownAnimator = iOSDropDownAnimator()
+    weak var anchorView: UITextField?
     private lazy var dismissingView: UIView = {
         let view = HitTestingView(tableViewContainer, anchorView) { [weak self] _, _ in
             if !UIAccessibility.isVoiceOverRunning {
@@ -32,7 +32,7 @@ open class iOSDropDown: NSObject {
         }
         return view
     }()
-    
+
     private lazy var tableViewContainer: UIView = {
         let view = UIView()
         view.layer.shadowColor = UIColor.black.cgColor
@@ -43,17 +43,17 @@ open class iOSDropDown: NSObject {
         view.isAccessibilityElement = false
         return view
     }()
-    
+
     private var _tableView: UITableView?
     private var tableView: UITableView {
         let tableView = _tableView ?? createTableView()
         _tableView = tableView
         return tableView
     }
-    
+
     private var cellsMetadata = [CellMetadata]()
     private var _separatorStyle: UITableViewCell.SeparatorStyle = .singleLine
-    
+
     private func createTableView() -> UITableView {
         let view = UITableView()
         view.autoresizingMask = []
@@ -64,58 +64,63 @@ open class iOSDropDown: NSObject {
         view.separatorInset = .zero
         view.separatorStyle = _separatorStyle
         view.layer.cornerRadius = tableViewContainer.layer.cornerRadius
-        cellsMetadata.forEach { cellClass in
+        for cellClass in cellsMetadata {
             view.register(cellClass.cellClass.self, forCellReuseIdentifier: cellClass.identifier)
         }
         return view
     }
-    
+
     init(anchorView: UITextField) {
         self.anchorView = anchorView
         keyboardSupport = iOSDropDownKeyboardSupport(dropDownPresenter: dropDownPresenter)
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(handleDropDownWillShow(_:)), name: iOSDropDown.dropDownWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleDropDownWillShow(_:)),
+            name: iOSDropDown.dropDownWillShowNotification,
+            object: nil
+        )
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     public func show() {
         showDropDown(animate: _tableView == nil, delay: keyboardSupport.isKeyboardVisible == true ? 0.0 : 0.5)
     }
-    
+
     public func hide() {
         tearDown()
     }
-    
+
     public func register<T: UITableViewCell>(cellClass: T.Type) {
         register(cellMetadata: CellMetadata(cellClass: cellClass, identifier: String(describing: T.self)))
     }
-    
+
     @objc public func registerCellClass(_ cellClass: AnyClass, forCellReuseIdentifier identifier: String) {
         register(cellMetadata: CellMetadata(cellClass: cellClass, identifier: identifier))
     }
-    
+
     func reloadData() {
-        guard let anchorView = self.anchorView, let window = anchorView.window, !isHidden else { return }
+        guard let anchorView = anchorView, let window = anchorView.window, !isHidden else { return }
         layout(anchorView: anchorView, window: window, animate: false, delay: 0)
     }
-    
+
     private func register(cellMetadata: CellMetadata) {
         cellsMetadata.append(cellMetadata)
         _tableView?.register(cellMetadata.cellClass.self, forCellReuseIdentifier: cellMetadata.identifier)
     }
-    
+
     func showDropDown(animate: Bool, delay: TimeInterval, requiresFirstResponder: Bool = false) {
-        guard let anchorView = self.anchorView,
+        guard let anchorView = anchorView,
               let window = anchorView.window,
-              ((requiresFirstResponder && anchorView.isFirstResponder) || !requiresFirstResponder) else { return }
+              (requiresFirstResponder && anchorView.isFirstResponder) || !requiresFirstResponder else { return }
         notifyDropDownWillShow()
         setUp(anchorView, window)
         layout(anchorView: anchorView, window: window, animate: animate, delay: delay)
     }
-    
+
     private func setUp(_ anchorView: UITextField, _ window: UIWindow) {
         dropDownPresenter.setUp(dropDown: self)
         anchorView.superview?.bringSubviewToFront(anchorView)
@@ -129,11 +134,11 @@ open class iOSDropDown: NSObject {
             window.addSubview(tableViewContainer)
             window.bringSubviewToFront(tableViewContainer)
         }
-        if (tableView.superview == nil) {
+        if tableView.superview == nil {
             tableViewContainer.addSubview(tableView)
         }
     }
-    
+
     private func tearDown() {
         dropDownFrame = .zero
         _tableView?.removeFromSuperview()
@@ -142,29 +147,30 @@ open class iOSDropDown: NSObject {
         dropDownPresenter.tearDown()
         dropDownAnimator.cancel()
     }
-    
-    internal var isHidden: Bool {
+
+    var isHidden: Bool {
         _tableView == nil
     }
-    
+
     private func layout(anchorView: UITextField, window: UIWindow, animate: Bool, delay: TimeInterval) {
         let dropDownLayout = calculateDropDownLayout()
         prepareTableView(offscreenHeight: dropDownLayout.offscreenHeight)
         layoutDropDown(using: dropDownLayout)
-        
+
         func calculateDropDownLayout() -> DropDownLayout {
             tableView.reloadData()
             return iOSDropDownLayoutCalculator.calculateDropDownLayout(
                 desirableContainerHeight: tableView.calculateTableViewHeight(),
                 anchorViewFrame: anchorView.convert(anchorView.bounds, to: window),
                 minYOfDropDown: calculateMinYOfDropDown(),
-                maxYOfDropDown: calculateMaxYOfDropDown(window))
+                maxYOfDropDown: calculateMaxYOfDropDown(window)
+            )
         }
-        
+
         func prepareTableView(offscreenHeight: CGFloat) {
             tableView.isScrollEnabled = offscreenHeight > 0.0
         }
-    
+
         func layoutDropDown(using layout: DropDownLayout) {
             dropDownAnimator.cancel()
             if animate {
@@ -181,18 +187,18 @@ open class iOSDropDown: NSObject {
             window.bringSubviewToFront(dismissingView)
         }
     }
-    
+
     private func notifyDropDownWillShow() {
         NotificationCenter.default.post(name: iOSDropDown.dropDownWillShowNotification, object: self)
     }
-    
+
     @objc func handleDropDownWillShow(_ notification: Notification) {
         guard let sender = notification.object as AnyObject? else { return }
         if self !== sender {
             hide()
         }
     }
-    
+
     private var dropDownFrame: CGRect {
         get {
             tableViewContainer.frame
@@ -202,15 +208,15 @@ open class iOSDropDown: NSObject {
             tableView.frame = tableViewContainer.bounds
         }
     }
-    
+
     private var verticalMargin: CGFloat {
         50.0
     }
-    
+
     private func calculateMinYOfDropDown() -> CGFloat {
         verticalMargin
     }
-    
+
     private func calculateMaxYOfDropDown(_ window: UIWindow) -> CGFloat {
         if keyboardSupport.isKeyboardVisible == true, let keyboardFrame = keyboardSupport.keyboardFrame {
             keyboardFrame.minY - verticalMargin
@@ -232,7 +238,7 @@ extension iOSDropDown {
             _tableView?.layer.cornerRadius = newValue
         }
     }
-    
+
     var shadowRadius: CGFloat {
         get {
             tableViewContainer.layer.shadowRadius
@@ -241,7 +247,7 @@ extension iOSDropDown {
             tableViewContainer.layer.shadowRadius = newValue
         }
     }
-    
+
     var shadowOffset: CGSize {
         get {
             tableViewContainer.layer.shadowOffset
@@ -250,7 +256,7 @@ extension iOSDropDown {
             tableViewContainer.layer.shadowOffset = newValue
         }
     }
-    
+
     var shadowColor: CGColor? {
         get {
             tableViewContainer.layer.shadowColor
@@ -259,7 +265,7 @@ extension iOSDropDown {
             tableViewContainer.layer.shadowColor = newValue
         }
     }
-    
+
     var shadowOpacity: Float {
         get {
             tableViewContainer.layer.shadowOpacity
@@ -268,7 +274,7 @@ extension iOSDropDown {
             tableViewContainer.layer.shadowOpacity = newValue
         }
     }
-    
+
     var separatorStyle: UITableViewCell.SeparatorStyle {
         get {
             _separatorStyle
@@ -278,5 +284,4 @@ extension iOSDropDown {
             _tableView?.separatorStyle = newValue
         }
     }
-    
 }

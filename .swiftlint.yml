@@ -1,0 +1,14 @@
+disabled_rules:
+  - trailing_comma
+included:
+  - iOSComboBox/Sources
+  - iOSComboBoxApp
+
+excluded:
+  - Pods
+
+line_length:
+  error: 150
+  warning: 150
+  ignores_comments: true
+  ignores_urls: true
